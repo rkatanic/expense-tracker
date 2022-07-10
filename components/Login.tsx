@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useAuth } from "../context/AuthUserContext";
 
-const Home = (): JSX.Element => {
+const Login = (): JSX.Element => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -75,4 +74,4 @@ const Home = (): JSX.Element => {
   );
 };
 
-export default Home;
+export default Login;

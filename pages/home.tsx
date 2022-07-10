@@ -3,6 +3,9 @@ import { useRouter } from "next/router";
 import { useAuth } from "../context/AuthUserContext";
 import axios from "axios";
 import { getCookie } from "../util/utils";
+import TransactionTable from "../components/TransactionsTable";
+import AddTransactionModal from "../components/AddTransactionModal";
+import { getAllTransactionsInDateRange } from "../api/transactionsApi";
 
 var date = new Date(),
   year = date.getFullYear(),
@@ -21,25 +24,15 @@ const Home = () => {
 
   useEffect((): void => {
     if (!authUser) router.push("/");
-  }, [authUser]);
-
-  if (!authUser) return null;
+  }, [authUser, router]);
 
   useEffect(() => {
     fetchTransactions();
   }, []);
 
-  const fetchTransactions = async () => {
-    const res = await axios.get("/api/transactions", {
-      headers: {
-        authorization: getCookie("token") as any,
-      },
-      params: {
-        startDate,
-        endDate,
-      },
-    });
-    setTransactions(res.data.data);
+  const fetchTransactions = async (): Promise<void> => {
+    const res = await getAllTransactionsInDateRange(startDate, endDate);
+    setTransactions(res);
   };
 
   const deleteTransaction = async (id: string) => {
@@ -50,6 +43,7 @@ const Home = () => {
     });
     fetchTransactions();
   };
+
   const createTransaction = async () => {
     const res = await axios.post("/api/transactions", null, {
       headers: {
@@ -60,48 +54,14 @@ const Home = () => {
     fetchTransactions();
   };
 
+  if (!authUser) return null;
+
   return (
     <div>
       logged in page
-      <div className="transaction">
-        <div>
-          {transactions.map((transaction: any) => (
-            <div key={transaction.id}>
-              <p>{transaction.name}</p>
-              <p>{transaction.type}</p>
-              <p>{transaction.value}</p>
-              <p>{new Date(transaction.dateCreated).toString()}</p>
-              <button onClick={() => deleteTransaction(transaction.id)}>
-                delete
-              </button>
-            </div>
-          ))}
-        </div>
-        <div>
-          <button onClick={createTransaction}>create new transaction</button>
-          <div>
-            <label htmlFor="INCOME">INCOME</label>
-            <input
-              type="radio"
-              id="INCOME"
-              name="fav_language"
-              value="INCOME"
-            />
-          </div>
-          <div>
-            <label htmlFor="OUTCOME">OUTCOME</label>
-            <input
-              type="radio"
-              id="OUTCOME"
-              name="fav_language"
-              value="OUTCOME"
-            />
-          </div>
-          <input type="text" placeholder="Name" />
-          <input type="number" placeholder="Value" />
-          <input type="date" />
-        </div>
-      </div>
+      <TransactionTable transactions={transactions} />
+      <AddTransactionModal />
+      <div></div>
       <button onClick={logout}>logout</button>
     </div>
   );
