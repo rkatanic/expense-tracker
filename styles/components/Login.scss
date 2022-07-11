@@ -1,0 +1,38 @@
+.login {
+    display: flex;
+    height: 100vh;
+    gap: 0;
+
+    &-form {
+        justify-content: center;
+        display: flex;
+        flex: 1;
+        margin: 0;
+        padding: 0;
+        z-index: 1;
+
+        &-content {
+            flex: 1;
+            gap: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 4rem;
+            max-width: 42rem;
+        }
+
+        &-error {
+            font-size: 0.875rem;
+            color: var(--color-primary-500);
+        }
+    }
+
+}
+
+.pattern_svg__pattern {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}

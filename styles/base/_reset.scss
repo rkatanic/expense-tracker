@@ -1,0 +1,25 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    font-family: var(--font);
+    color: var(--color-white-one);
+    background-color: var(--color-gray-100);
+    height: 100vh !important;
+    background-image: radial-gradient(var(--color-gray-300) 1px, transparent 1px);
+    background-size: 0.5rem 0.5rem;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+input,
+button {
+    font-family: var(--font);
+}

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should render 1`] = `
+<body>
+  <div>
+    <button
+      class="btn-primary btn-full-width"
+      type="button"
+    >
+      button
+    </button>
+  </div>
+</body>
+`;

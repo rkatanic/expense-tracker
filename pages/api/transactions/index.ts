@@ -3,7 +3,7 @@ import {
   getAllTransactionsInDateRange,
 } from "../../../lib/dataBaseQueries";
 import { withAuth } from "../../../lib/middleware/withAuth";
-import { Transaction } from "../../../types/Transaction";
+import { Transaction, TransactionType } from "../../../types/Transaction";
 
 const handler = async (req: any, res: any): Promise<any> => {
   try {
@@ -14,7 +14,7 @@ const handler = async (req: any, res: any): Promise<any> => {
         +req.query.endDate
       );
       const income = { total: 0, numberOfTransactions: 0 };
-      const outcome = { total: 0, numberOfTransactions: 0 };
+      const expense = { total: 0, numberOfTransactions: 0 };
       const availableBalance = { total: 0, percentage: 0 };
 
       const data: Transaction[] = transactions.docs.map((doc) => {
@@ -29,11 +29,11 @@ const handler = async (req: any, res: any): Promise<any> => {
           dateModified,
         } = doc.data();
 
-        if (type === "expense") {
-          outcome.total += doc.data().value;
-          outcome.numberOfTransactions += 1;
+        if (type === TransactionType.EXPENSE) {
+          expense.total += doc.data().value;
+          expense.numberOfTransactions += 1;
         }
-        if (type === "income") {
+        if (type === TransactionType.INCOME) {
           income.total += doc.data().value;
           income.numberOfTransactions += 1;
         }
@@ -52,7 +52,7 @@ const handler = async (req: any, res: any): Promise<any> => {
       });
 
       availableBalance.total =
-        income.total - outcome.total > 0 ? income.total - outcome.total : 0;
+        income.total - expense.total > 0 ? income.total - expense.total : 0;
 
       availableBalance.percentage =
         availableBalance.total / income.total > 0
@@ -61,7 +61,7 @@ const handler = async (req: any, res: any): Promise<any> => {
 
       res.status(200).json({
         data,
-        outcome,
+        expense,
         income,
         availableBalance,
       });

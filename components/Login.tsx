@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../context/AuthUserContext";
+import Input from "./Input";
+import Button from "./Button";
+import Pattern from "../assets/pattern.svg";
 
 const Login = (): JSX.Element => {
   const [email, setEmail] = useState("");
@@ -9,7 +12,7 @@ const Login = (): JSX.Element => {
   const router = useRouter();
   const { authUser, signIn } = useAuth();
 
-  const onSubmit = (event: any) => {
+  const onSubmit = (event: any): void => {
     setError(null);
     signIn(email, password)
       .then(() => {
@@ -21,55 +24,36 @@ const Login = (): JSX.Element => {
     event.preventDefault();
   };
 
-  useEffect(() => {
+  useEffect((): void => {
     if (authUser) router.push("/home");
   }, [authUser]);
 
   return (
-    <div className="text-center" style={{ padding: "40px 0px" }}>
-      <div>
-        <div>
-          <h2>Login</h2>
+    <div className="login">
+      <form className="login-form" onSubmit={onSubmit}>
+        <div className="login-form-content">
+          <h2>Sign In</h2>
+          <Input
+            type="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            name="email"
+            id="loginEmail"
+            placeholder="Email"
+          />
+          <Input
+            type="password"
+            name="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            id="loginPassword"
+            placeholder="Password"
+          />
+          <Button text="Sign In" type="submit" fullWidth />
+          <div className="login-form-error">{error && <div>{error}</div>}</div>
         </div>
-      </div>
-      <div style={{ maxWidth: "400px", margin: "auto" }}>
-        <div>
-          <form onSubmit={onSubmit}>
-            {error && <div>{error}</div>}
-            <div>
-              <label>Email</label>
-              <div>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  name="email"
-                  id="loginEmail"
-                  placeholder="Email"
-                />
-              </div>
-            </div>
-            <div>
-              <label>Password</label>
-              <div>
-                <input
-                  type="password"
-                  name="password"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                  id="loginPassword"
-                  placeholder="Password"
-                />
-              </div>
-            </div>
-            <div>
-              <div>
-                <button>Login</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
+      </form>
+      <Pattern />
     </div>
   );
 };
