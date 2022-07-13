@@ -38,6 +38,9 @@ const handler = async (req: any, res: any): Promise<any> => {
           income.numberOfTransactions += 1;
         }
 
+        expense.total = +expense.total.toFixed(2);
+        availableBalance.total = +availableBalance.total.toFixed(2);
+
         return {
           id: doc.id,
           userId,
@@ -56,7 +59,7 @@ const handler = async (req: any, res: any): Promise<any> => {
 
       availableBalance.percentage =
         availableBalance.total / income.total > 0
-          ? (availableBalance.total / income.total) * 100
+          ? +((availableBalance.total / income.total) * 100).toFixed(2)
           : 0;
 
       res.status(200).json({

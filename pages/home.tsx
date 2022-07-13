@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../context/AuthUserContext";
-import axios from "axios";
-import { getCookie } from "../util/utils";
 import TransactionTable from "../components/TransactionsTable";
 import AddTransactionModal from "../components/AddTransactionModal";
 import { getAllTransactionsInDateRange } from "../api/transactionsApi";
+import Overview from "../components/Overview";
 
 var date = new Date(),
   year = date.getFullYear(),
@@ -16,7 +15,18 @@ var lastDay = new Date(year, month + 1, 0).getTime();
 const Home = () => {
   const { authUser, logout } = useAuth();
   const router = useRouter();
-  const [transactions, setTransactions] = useState([]);
+  const [data, setData] = useState({
+    transactions: [],
+    income: {
+      total: 0,
+      numberOfTransactions: 0,
+    },
+    expense: { total: 0, numberOfTransactions: 0 },
+    availableBalance: {
+      total: 0,
+      percentage: 0,
+    },
+  });
   const [{ startDate, endDate }, setDateRange] = useState({
     startDate: firstDay,
     endDate: lastDay,
@@ -32,34 +42,20 @@ const Home = () => {
 
   const fetchTransactions = async (): Promise<void> => {
     const res = await getAllTransactionsInDateRange(startDate, endDate);
-    setTransactions(res);
-  };
-
-  const deleteTransaction = async (id: string) => {
-    await axios.delete(`/api/transactions/${id}`, {
-      headers: {
-        authorization: getCookie("token") as any,
-      },
-    });
-    fetchTransactions();
-  };
-
-  const createTransaction = async () => {
-    const res = await axios.post("/api/transactions", null, {
-      headers: {
-        authorization: getCookie("token") as any,
-      },
-    });
-    console.log(res.data.data);
-    fetchTransactions();
+    setData({ transactions: res.data, ...res });
+    console.log(data);
   };
 
   if (!authUser) return null;
 
   return (
-    <div>
-      logged in page
-      <TransactionTable transactions={transactions} />
+    <div className="home">
+      <Overview
+        income={data.income}
+        expense={data.expense}
+        availableBalance={data.availableBalance}
+      />
+      <TransactionTable transactions={data.transactions} />
       <AddTransactionModal />
       <div></div>
       <button onClick={logout}>logout</button>

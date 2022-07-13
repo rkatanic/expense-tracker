@@ -44,7 +44,7 @@ describe("transactionsApi", (): void => {
           endDate: mockEndDate,
         },
       });
-      expect(response).toEqual(mockTransactions);
+      expect(response).toEqual({ data: mockTransactions });
     });
 
     it("should return empty list when error occurs", async (): Promise<void> => {

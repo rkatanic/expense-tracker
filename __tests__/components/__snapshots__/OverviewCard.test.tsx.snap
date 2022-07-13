@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OverviewCard should render 1`] = `
+<body>
+  <div>
+    <div
+      class="overview-card"
+    >
+      <div
+        class="overview-card-header"
+      >
+        <div
+          class="overview-card-icon"
+        >
+          icon
+        </div>
+        <div
+          class="overview-card-primary-text-wrapper"
+        >
+          <div
+            class="overview-card-primary-value"
+          >
+            100
+             
+            <span
+              class="overview-card-currency"
+            >
+              BAM
+            </span>
+          </div>
+          <div
+            class="overview-card-primary-description"
+          >
+            primary text
+          </div>
+        </div>
+      </div>
+      <div
+        class="overview-card-footer"
+      >
+        <div
+          class="overview-card-secondary-description"
+        >
+          secondary text
+        </div>
+        <div
+          class="overview-card-secondary-value"
+        >
+          1
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

@@ -16,9 +16,8 @@ export const getAllTransactionsInDateRange = async (
         endDate,
       },
     });
-    return response.data.data;
+    return response.data;
   } catch (e) {
-    console.error(e);
     return [];
   }
 };

@@ -5,6 +5,7 @@ import TablePaginationUnstyled, {
 } from "@mui/base/TablePaginationUnstyled";
 import { Transaction } from "../types/Transaction";
 import UpdateTransactionModal from "./UpdateTransactionModal";
+import { DATE_FORMAT } from "../util/dateTimeUtils";
 
 const blue = {
   200: "#A5D8FF",
@@ -147,17 +148,7 @@ const TransactionTable = ({ transactions }: Props): JSX.Element => {
 
   return (
     <Root sx={{ width: 500, maxWidth: "100%" }}>
-      <table aria-label="custom pagination table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Date</th>
-            <th>Category</th>
-            <th>Value</th>
-            <th>Action</th>
-          </tr>
-        </thead>
+      <table className="transactions-table">
         <tbody>
           {(rowsPerPage > 0
             ? transactions.slice(
@@ -172,7 +163,7 @@ const TransactionTable = ({ transactions }: Props): JSX.Element => {
                 {transaction.type}
               </td>
               <td style={{ width: 120 }} align="right">
-                {new Date(transaction.dateCreated).toString()}
+                {DATE_FORMAT.format(new Date(transaction.dateCreated))}
               </td>
               <td style={{ width: 120 }} align="right">
                 {transaction.category}

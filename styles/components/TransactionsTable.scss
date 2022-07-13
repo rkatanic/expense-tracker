@@ -1,0 +1,11 @@
+.transactions-table {
+    font-size: 1rem !important;
+
+    td {
+        border: 0 !important;
+
+        &:nth-child(even) {
+            color: var(--color-gray-900);
+        }
+    }
+}
