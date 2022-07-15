@@ -1,11 +1,39 @@
-.transactions-table {
-    font-size: 1rem !important;
+.transactions {
+    h2 {
+        margin-top: 2rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--color-gray-500);
+    }
 
-    td {
-        border: 0 !important;
+    &-table {
+        font-size: 1rem;
+        width: 100%;
 
-        &:nth-child(even) {
+        td {
+            border: 0;
+            padding: 1rem 0;
+            width: 10rem;
+
+            &:nth-child(odd) {
+                color: var(--color-gray-900);
+            }
+
+            &:first-child {
+                width: 4rem;
+            }
+
+            &:last-child {
+                text-align: right;
+            }
+
+        }
+
+        .currency {
+            font-size: 0.875rem;
+            margin-left: 1rem;
             color: var(--color-gray-900);
         }
+
+
     }
 }

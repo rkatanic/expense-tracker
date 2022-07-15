@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthUserContext";
 import { Category, Transaction, TransactionType } from "../types/Transaction";
 import { updateTransaction } from "../api/transactionsApi";
+import IconButton from "./IconButton";
 
 interface Props {
   transaction: Transaction;
@@ -36,9 +37,10 @@ const AddTransactionModal = ({ transaction }: Props): JSX.Element => {
 
   return (
     <div>
-      <button onClick={() => setShowModal((prevState) => !prevState)}>
-        edit
-      </button>
+      <IconButton
+        icon={<>...</>}
+        onClick={() => setShowModal((prevState) => !prevState)}
+      />
       {showModal && (
         <>
           <button onClick={handleTransactionUpdate}>update transaction</button>

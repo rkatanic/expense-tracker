@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconButton should render 1`] = `
+<body>
+  <div>
+    <button
+      class="icon-button"
+      type="button"
+    >
+      icon
+    </button>
+  </div>
+</body>
+`;

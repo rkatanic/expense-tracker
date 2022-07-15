@@ -16,9 +16,7 @@ const Overview = ({
 }: Props): JSX.Element => {
   return (
     <div className="overview">
-      <div>
-        <h2>Overview</h2>
-      </div>
+      <h2>Overview</h2>
       <div className="overview-cards">
         <OverviewCard
           icon={<CoinIcon />}
