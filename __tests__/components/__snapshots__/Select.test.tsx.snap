@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select should render 1`] = `
+<body>
+  <div>
+    <select
+      class="select"
+      data-testid="select"
+    >
+      <option>
+        option one
+      </option>
+      <option>
+        option two
+      </option>
+    </select>
+  </div>
+</body>
+`;

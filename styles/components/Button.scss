@@ -7,13 +7,21 @@
         font-weight: 600;
         padding: 0.5rem 2rem;
 
-        &:hover {
+        &:hover:not(:disabled) {
             cursor: pointer;
             background-color: var(--color-primary-600);
+        }
+
+        &:disabled {
+            color: var(--color-gray-600);
+            background-color: var(--color-primary-100);
+            cursor: not-allowed;
         }
     }
 
     &-full-width {
         width: 100%;
     }
+
+
 }

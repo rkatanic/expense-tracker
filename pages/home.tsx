@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../context/AuthUserContext";
 import TransactionTable from "../components/TransactionsTable";
-import AddTransactionModal from "../components/AddTransactionModal";
 import { getAllTransactionsInDateRange } from "../api/transactionsApi";
 import Overview from "../components/Overview";
+import Actions from "../components/Actions";
 
 var date = new Date(),
   year = date.getFullYear(),
@@ -13,7 +13,7 @@ var firstDay = new Date(year, month, 1).getTime();
 var lastDay = new Date(year, month + 1, 0).getTime();
 
 const Home = () => {
-  const { authUser, logout } = useAuth();
+  const { authUser } = useAuth();
   const router = useRouter();
   const [data, setData] = useState({
     transactions: [],
@@ -50,15 +50,13 @@ const Home = () => {
 
   return (
     <div className="home">
+      <Actions />
       <Overview
         income={data.income}
         expense={data.expense}
         availableBalance={data.availableBalance}
       />
       <TransactionTable transactions={data.transactions} />
-      <AddTransactionModal />
-      <div></div>
-      <button onClick={logout}>logout</button>
     </div>
   );
 };

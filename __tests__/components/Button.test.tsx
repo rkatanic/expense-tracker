@@ -20,4 +20,17 @@ describe("Button", (): void => {
 
     expect(mockOnClick).toHaveBeenCalledTimes(1);
   });
+
+  it("should not call onClick handler when disabled", (): void => {
+    const mockOnClick = jest.fn();
+    const { getByText } = render(
+      <Button disabled={true} text="button" onClick={mockOnClick} />
+    );
+
+    const element = getByText("button");
+    fireEvent.click(element);
+
+    expect(element.getAttribute("disabled")).toBe("");
+    expect(mockOnClick).not.toHaveBeenCalled();
+  });
 });

@@ -4,7 +4,7 @@ exports[`IconButton should render 1`] = `
 <body>
   <div>
     <button
-      class="icon-button"
+      class="icon-button icon-button-primary"
       type="button"
     >
       icon
