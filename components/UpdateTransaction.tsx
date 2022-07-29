@@ -65,9 +65,9 @@ const UpdateTransaction = ({ transaction }: Props): JSX.Element => {
           <div className="update-transaction-modal-overlay"></div>
           <div className="update-transaction-modal" ref={modalRef}>
             <div className="update-transaction-modal-header">
-              <p className="update-transaction-modal-header-title">
+              <h3 className="update-transaction-modal-header-title">
                 Update Transaction
-              </p>
+              </h3>
               <XIcon onClick={handleModalToggle} />
             </div>
 

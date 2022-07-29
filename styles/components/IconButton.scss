@@ -27,14 +27,14 @@
         transition: 0.25s;
 
         svg>path {
-            stroke: var(--color-gray-900);
+            stroke: var(--color-white-one);
         }
 
         &:hover {
-            border-color: var(--color-white-one);
+            border-color: var(--color-primary-500);
 
             svg>path {
-                stroke: var(--color-white-one);
+                stroke: var(--color-primary-500);
             }
         }
     }

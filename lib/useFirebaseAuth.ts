@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
+
+import { app } from "./firebaseClient";
+import nookies from "nookies";
 import {
   getAuth,
   signInWithEmailAndPassword,
   signOut,
   UserCredential,
 } from "firebase/auth";
-import { app } from "./firebaseClient";
-import nookies from "nookies";
 
 const useFirebaseAuth = () => {
   const [authUser, setAuthUser] = useState(null);

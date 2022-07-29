@@ -10,6 +10,7 @@ interface Props {
   pattern?: string;
   min?: number;
   max?: number;
+  required?: boolean;
 }
 
 const Input = ({
@@ -24,12 +25,14 @@ const Input = ({
   pattern,
   min,
   max,
+  required,
 }: Props): JSX.Element => {
   const isRadio = type === "radio";
 
   return (
     <div className="input-container">
       <input
+        required={required}
         min={min}
         max={max}
         pattern={pattern}

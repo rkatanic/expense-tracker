@@ -59,9 +59,9 @@ const AddTransaction = (): JSX.Element => {
           <div className="add-transaction-modal-overlay"></div>
           <div className="add-transaction-modal" ref={modalRef}>
             <div className="add-transaction-modal-header">
-              <p className="add-transaction-modal-header-title">
+              <h3 className="add-transaction-modal-header-title">
                 Create Transaction
-              </p>
+              </h3>
               <XIcon onClick={handleModalToggle} />
             </div>
 

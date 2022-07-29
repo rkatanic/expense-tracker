@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useAuth } from "../context/AuthUserContext";
 import Input from "./Input";
 import Button from "./Button";
-import Pattern from "../assets/pattern.svg";
+import AbstractLine from "../assets/abstract-line.svg";
 
 const Login = (): JSX.Element => {
   const [email, setEmail] = useState("");
@@ -32,8 +32,14 @@ const Login = (): JSX.Element => {
     <div className="login">
       <form className="login-form" onSubmit={onSubmit}>
         <div className="login-form-content">
-          <h2>Sign In</h2>
+          <div>
+            <h2 className="login-form-content-title">Dime Flow</h2>
+            <p className="login-form-content-description">
+              Expense tracking app
+            </p>
+          </div>
           <Input
+            required
             type="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
@@ -42,6 +48,7 @@ const Login = (): JSX.Element => {
             placeholder="Email"
           />
           <Input
+            required
             type="password"
             name="password"
             value={password}
@@ -53,7 +60,7 @@ const Login = (): JSX.Element => {
           <div className="login-form-error">{error && <div>{error}</div>}</div>
         </div>
       </form>
-      <Pattern />
+      <AbstractLine />
     </div>
   );
 };
