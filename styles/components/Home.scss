@@ -2,4 +2,16 @@
   max-width: 51rem;
   margin: auto;
   position: relative;
+  padding: 2rem 0;
+
+  &-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-date-range {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
 }

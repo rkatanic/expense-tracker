@@ -10,14 +10,14 @@
     cursor: pointer;
 
     &-primary {
-        background-color: var(--color-white-one);
+        background-color: var(--color-primary-500);
 
         svg>path {
             stroke: var(--color-black-one);
         }
 
         &:hover {
-            background-color: var(--color-white-two);
+            background-color: var(--color-primary-600);
         }
     }
 
