@@ -9,6 +9,8 @@
         font-size: 1rem;
         width: 100%;
 
+        border-bottom: 2px solid var(--color-gray-600);
+
         td {
             border: 0;
             padding: 1rem 0;
@@ -34,6 +36,20 @@
             color: var(--color-gray-900);
         }
 
+
+        &-footer {
+            &-rows-per-page {
+                margin-top: 0.5rem;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+
+                span {
+                    color: var(--color-gray-900);
+                    white-space: nowrap;
+                }
+            }
+        }
 
     }
 }
