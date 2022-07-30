@@ -38,8 +38,17 @@
 
 
         &-footer {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            &-page-actions {
+                display: flex;
+                gap: 1rem;
+            }
+
             &-rows-per-page {
-                margin-top: 0.5rem;
                 display: flex;
                 align-items: center;
                 gap: 1rem;

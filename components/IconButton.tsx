@@ -3,6 +3,7 @@ interface Props {
   onClick: () => void;
   type?: "submit" | "button";
   variant?: "primary" | "secondary";
+  disabled?: boolean;
 }
 
 const IconButton = ({
@@ -10,9 +11,11 @@ const IconButton = ({
   onClick,
   type = "button",
   variant = "primary",
+  disabled,
 }: Props) => {
   return (
     <button
+      disabled={disabled}
       className={`icon-button icon-button-${variant}`}
       type={type}
       onClick={onClick}

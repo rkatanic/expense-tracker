@@ -3,6 +3,9 @@ import { Transaction } from "../types/Transaction";
 import UpdateTransactionModal from "./UpdateTransaction";
 import { DATE_FORMAT } from "../util/dateTimeUtils";
 import Select from "./Select";
+import IconButton from "./IconButton";
+import ArrowLeftIcon from "../assets/icons/arrow-left.svg";
+import ArrowRightIcon from "../assets/icons/arrow-right.svg";
 
 interface Props {
   transactions: Transaction[];
@@ -20,18 +23,26 @@ const TransactionTable = ({ transactions }: Props): JSX.Element => {
     setRowsPerPage(+e.target.value);
   };
 
+  const transactionsPerPageRows = transactions.slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage
+  );
+  const totalPages = Math.ceil(transactions.length / rowsPerPage);
+
+  const handlePreviousPageSet = (): void => {
+    setPage((prevState) => prevState - 1);
+  };
+
+  const handleNextPageSet = (): void => {
+    setPage((prevState) => prevState + 1);
+  };
+
   return (
     <div className="transactions">
-      <h2>Transactions</h2>
+      <h2>Transactions ({transactions.length})</h2>
       <table className="transactions-table">
         <tbody>
-          {(rowsPerPage > 0
-            ? transactions.slice(
-                page * rowsPerPage,
-                page * rowsPerPage + rowsPerPage
-              )
-            : transactions
-          ).map((transaction) => (
+          {transactionsPerPageRows.map((transaction) => (
             <tr key={transaction.id}>
               <td>
                 <UpdateTransactionModal transaction={transaction} />
@@ -60,6 +71,20 @@ const TransactionTable = ({ transactions }: Props): JSX.Element => {
               )
             )}
           </Select>
+        </div>
+        <div className="transactions-table-footer-page-actions">
+          <IconButton
+            variant="secondary"
+            disabled={page === 0}
+            onClick={handlePreviousPageSet}
+            icon={<ArrowLeftIcon />}
+          />
+          <IconButton
+            variant="secondary"
+            disabled={page + 1 === totalPages}
+            onClick={handleNextPageSet}
+            icon={<ArrowRightIcon />}
+          />
         </div>
       </div>
     </div>
