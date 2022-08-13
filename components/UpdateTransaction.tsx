@@ -1,22 +1,28 @@
-import { useEffect, useRef, useState } from "react";
+import { EffectCallback, useEffect, useRef, useState } from "react";
 import { useAuth } from "../context/AuthUserContext";
 import { Category, Transaction, TransactionType } from "../types/Transaction";
 import { updateTransaction } from "../api/transactionsApi";
-import IconButton from "./IconButton";
 import Input from "./Input";
 import Button from "./Button";
 import XIcon from "../assets/icons/x.svg";
-import ThreeDotsIcon from "../assets/icons/three-dots.svg";
+
 import Select from "./Select";
+import { useGlobalContext } from "../context/GlobalContext";
 
 interface Props {
+  toggleModal: () => void;
   transaction: Transaction;
+  isOpen: boolean;
 }
-const UpdateTransaction = ({ transaction }: Props): JSX.Element => {
+const UpdateTransaction = ({
+  toggleModal,
+  transaction,
+  isOpen,
+}: Props): JSX.Element => {
+  const { useFetchData } = useGlobalContext();
   const { authUser }: any = useAuth();
 
   const modalRef = useRef<any>();
-  const [showModal, setShowModal] = useState(false);
 
   const [name, setName] = useState(transaction.name);
   const [value, setValue] = useState(transaction.value);
@@ -40,27 +46,26 @@ const UpdateTransaction = ({ transaction }: Props): JSX.Element => {
       dateModified: new Date().getTime(),
     };
 
+    toggleModal();
     await updateTransaction(updatedTransaction);
+    useFetchData();
   };
 
-  const handleModalToggle = (): void =>
-    setShowModal((prevState: boolean) => !prevState);
-
-  useEffect(() => {
+  useEffect((): ReturnType<EffectCallback> => {
     const handleClickOutside = (event: Event): void => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
-        handleModalToggle();
+        toggleModal();
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
 
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return (): void =>
+      document.removeEventListener("mousedown", handleClickOutside);
   }, [modalRef]);
 
   return (
-    <div>
-      <IconButton icon={<ThreeDotsIcon />} onClick={handleModalToggle} />
-      {showModal && (
+    <>
+      {isOpen ? (
         <>
           <div className="update-transaction-modal-overlay"></div>
           <div className="update-transaction-modal" ref={modalRef}>
@@ -68,7 +73,7 @@ const UpdateTransaction = ({ transaction }: Props): JSX.Element => {
               <h3 className="update-transaction-modal-header-title">
                 Update Transaction
               </h3>
-              <XIcon onClick={handleModalToggle} />
+              <XIcon onClick={toggleModal} />
             </div>
 
             <Input
@@ -133,8 +138,8 @@ const UpdateTransaction = ({ transaction }: Props): JSX.Element => {
             <Button onClick={handleTransactionUpdate} text="Update" />
           </div>
         </>
-      )}
-    </div>
+      ) : null}
+    </>
   );
 };
 

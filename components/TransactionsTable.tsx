@@ -1,19 +1,20 @@
 import * as React from "react";
-import { Transaction } from "../types/Transaction";
-import UpdateTransactionModal from "./UpdateTransaction";
+import UpdateTransaction from "./UpdateTransaction";
 import { DATE_FORMAT } from "../util/dateTimeUtils";
 import Select from "./Select";
 import IconButton from "./IconButton";
 import ArrowLeftIcon from "../assets/icons/arrow-left.svg";
 import ArrowRightIcon from "../assets/icons/arrow-right.svg";
-
-interface Props {
-  transactions: Transaction[];
-}
+import { useGlobalContext } from "../context/GlobalContext";
+import TransactionsTableActions from "./TransactionsTableActions";
 
 const ROWS_PER_PAGE = [5, 10, 15, 20];
 
-const TransactionTable = ({ transactions }: Props): JSX.Element => {
+const TransactionTable = (): JSX.Element => {
+  const {
+    data: { transactions },
+  } = useGlobalContext();
+
   const [rowsPerPage, setRowsPerPage] = React.useState(ROWS_PER_PAGE[0]);
   const [page, setPage] = React.useState(0);
 
@@ -45,7 +46,7 @@ const TransactionTable = ({ transactions }: Props): JSX.Element => {
           {transactionsPerPageRows.map((transaction) => (
             <tr key={transaction.id}>
               <td>
-                <UpdateTransactionModal transaction={transaction} />
+                <TransactionsTableActions transaction={transaction} />
               </td>
               <td>{transaction.name}</td>
               <td>{transaction.type}</td>

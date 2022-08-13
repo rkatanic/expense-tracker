@@ -1,11 +1,18 @@
-import { useEffect, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  EffectCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useAuth } from "../context/AuthUserContext";
 import { Category, Transaction, TransactionType } from "../types/Transaction";
-import { createTransaction } from "../api/transactionsApi";
 import Button from "./Button";
 import Input from "./Input";
 import Select from "./Select";
 import XIcon from "../assets/icons/x.svg";
+import { createTransaction } from "../api/transactionsApi";
+import { useGlobalContext } from "../context/GlobalContext";
 
 interface Props {
   onClose: () => void;
@@ -21,25 +28,29 @@ const INITIAL_NEW_TRANSACTION = {
 
 const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
   const { authUser }: any = useAuth();
-
+  const { useFetchData } = useGlobalContext();
   const modalRef = useRef<any>();
 
   const [newTransaction, setNewTransaction] = useState(INITIAL_NEW_TRANSACTION);
-  const { name, value, type, category, dateCreated } = newTransaction;
+  const { name, type, category, dateCreated } = newTransaction;
 
-  const handleTransactionCreate = async (): Promise<void> => {
+  const handleTransactionCreate = async (
+    e: ChangeEvent<HTMLFormElement>
+  ): Promise<void> => {
+    e.preventDefault();
+
     const transaction: Transaction = {
       ...newTransaction,
       userId: authUser.uid,
       dateCreated: dateCreated.getTime(),
     };
 
-    createTransaction(transaction);
     onClose();
+    await createTransaction(transaction);
     setNewTransaction(INITIAL_NEW_TRANSACTION);
   };
 
-  useEffect(() => {
+  useEffect((): ReturnType<EffectCallback> => {
     const handleClickOutside = (event: Event): void => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         onClose();
@@ -48,11 +59,12 @@ const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
     };
     document.addEventListener("mousedown", handleClickOutside);
 
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return (): void =>
+      document.removeEventListener("mousedown", handleClickOutside);
   }, [modalRef]);
 
   return (
-    <div className="add-transaction">
+    <>
       {isOpen ? (
         <>
           <div className="add-transaction-modal-overlay"></div>
@@ -147,11 +159,11 @@ const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
                 }
               />
             </div>
-            <Button type="submit" text="Save" />
+            <Button type="submit" text="Create" />
           </form>
         </>
       ) : null}
-    </div>
+    </>
   );
 };
 

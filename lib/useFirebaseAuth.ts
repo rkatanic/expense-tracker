@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, EffectCallback } from "react";
 import { app } from "./firebaseClient";
 import nookies from "nookies";
 import {
@@ -12,7 +11,7 @@ import {
 const useFirebaseAuth = () => {
   const [authUser, setAuthUser] = useState(null);
 
-  const clear = () => {
+  const clear = (): void => {
     setAuthUser(null);
   };
 
@@ -23,8 +22,8 @@ const useFirebaseAuth = () => {
 
   // listen for token changes
   // call setAuthUser and write new token as a cookie
-  useEffect(() => {
-    return getAuth(app).onIdTokenChanged(async (user) => {
+  useEffect((): ReturnType<EffectCallback> => {
+    return getAuth(app).onIdTokenChanged(async (user): Promise<void> => {
       if (!user) {
         setAuthUser(null);
         nookies.set(undefined, "token", "", { path: "/" });
@@ -37,13 +36,13 @@ const useFirebaseAuth = () => {
   }, []);
 
   // force refresh the token every 10 minutes
-  useEffect(() => {
+  useEffect((): ReturnType<EffectCallback> => {
     const handle = setInterval(async () => {
       const user = getAuth(app).currentUser;
       if (user) await user.getIdToken(true);
     }, 10 * 60 * 1000);
 
-    return () => clearInterval(handle);
+    return (): void => clearInterval(handle);
   }, []);
 
   return {

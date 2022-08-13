@@ -42,7 +42,7 @@ export const updateTransaction = async (
   });
 };
 
-export const deleteTransaction = async (id: string) => {
+export const deleteTransaction = async (id: string): Promise<void> => {
   await axios.delete(`/api/transactions/${id}`, {
     headers: {
       authorization: getCookie("token") as any,

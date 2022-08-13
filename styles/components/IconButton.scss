@@ -14,6 +14,10 @@
     &-primary {
         background-color: var(--color-primary-500);
 
+        &:disabled {
+            cursor: not-allowed;
+        }
+
         svg>path {
             stroke: var(--color-black-one);
         }
