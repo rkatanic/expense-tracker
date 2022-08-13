@@ -17,3 +17,7 @@
 @import "./components/AddTransaction.scss";
 @import "./components/Actions.scss";
 @import "./components/TransactionsTableActions.scss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
