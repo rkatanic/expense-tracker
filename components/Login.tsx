@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useAuth } from "../context/AuthUserContext";
 import Input from "./Input";
 import Button from "./Button";
-import AbstractLine from "../assets/abstract-line.svg";
+import { VscColorMode } from "react-icons/vsc";
 
 const Login = (): JSX.Element => {
   const [email, setEmail] = useState("");
@@ -24,43 +24,87 @@ const Login = (): JSX.Element => {
     event.preventDefault();
   };
 
+  const handleDarkThemeSwitch = (): void => {
+    if (document.body.classList.contains("dark")) {
+      document.body.classList.remove("dark");
+    } else {
+      document.body.classList.add("dark");
+    }
+  };
+
   useEffect((): void => {
     if (authUser) router.push("/home");
   }, [authUser]);
 
   return (
-    <div className="login">
-      <form className="login-form" onSubmit={onSubmit}>
-        <div className="login-form-content">
-          <div>
-            <h2 className="login-form-content-title">Dime Flow</h2>
-            <p className="login-form-content-description">
-              Expense tracking app
-            </p>
-          </div>
+    <div className="h-screen max-w-md m-auto overflow-hidden flex items-center justify-center px-8">
+      <div
+        className="z-10 absolute bottom-8 right-8 cursor-pointer"
+        onClick={handleDarkThemeSwitch}
+      >
+        <VscColorMode className="fill-black dark:fill-gray-500" />
+      </div>
+      <form className="w-full z-10 " onSubmit={onSubmit}>
+        <div className="flex flex-col gap-1 mb-8 items-center">
+          <h2 className="text-4xl font-black text-gray-800 dark:text-gray-300">
+            Dime Flow
+          </h2>
+          <p className="text-gray-400 dark:text-gray-500">
+            Expense tracking app
+          </p>
+        </div>
+        <div className="flex flex-col gap-6">
           <Input
+            size="large"
             required
             type="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             name="email"
             id="loginEmail"
-            placeholder="Email"
+            label="E-mail"
           />
           <Input
+            size="large"
             required
             type="password"
             name="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             id="loginPassword"
-            placeholder="Password"
+            label="Password"
           />
-          <Button text="Sign In" type="submit" fullWidth />
-          <div className="login-form-error">{error && <div>{error}</div>}</div>
+          <Button size="large" text="Sign In" type="submit" fullWidth />
+        </div>
+        <div className="text-rose-600 text-sm mt-4">
+          {error && <div>{error}</div>}
         </div>
       </form>
-      <AbstractLine />
+      <div className="fixed inset-0 [mask-image:linear-gradient(to_bottom_right,white,transparent,white)]">
+        <div className="shade shade-1"></div>
+        <div className="shade shade-2"></div>
+        <div className="shade shade-3"></div>
+        <div className="shade shade-4"></div>
+        <svg className="h-full w-full absolute inset-0">
+          <defs>
+            <pattern
+              id="grid"
+              width="30"
+              height="30"
+              patternUnits="userSpaceOnUse"
+            >
+              <rect width="30" height="30" fill="url(#tenthGrid)" />
+              <path
+                d="M 100 0 L 0 0 0 100"
+                fill="none"
+                className="stroke-gray-200 dark:stroke-gray-800"
+                stroke-width="1"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+      </div>
     </div>
   );
 };

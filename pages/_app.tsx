@@ -7,7 +7,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <AuthUserProvider>
       <GlobalContextProvider>
-        <Component {...pageProps} />
+        <div className="bg-white dark:bg-gray-900">
+          <Component {...pageProps} />
+        </div>
       </GlobalContextProvider>
     </AuthUserProvider>
   );

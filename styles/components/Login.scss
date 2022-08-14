@@ -1,56 +1,44 @@
-.login {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    text-align: center;
-    padding: 2rem;
+.shade {
+    position: absolute;
+    border-radius: 50%;
 
-
-    &-form {
-        display: flex;
-        justify-content: center;
-        flex: 1;
-        margin: 0;
-        padding: 0;
+    &-1 {
+        top: -30rem;
+        left: 30%;
+        transform: rotate(-40deg);
         z-index: 1;
-
-        &-content {
-            flex: 1;
-            gap: 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-
-            max-width: 42rem;
-            margin-bottom: 4rem;
-
-
-            &-title {
-                font-size: 3rem;
-                font-weight: 800;
-                margin: 0;
-                color: var(--color-white-two);
-            }
-
-            &-description {
-                font-size: 1.125rem;
-                color: var(--color-gray-900);
-                margin: 0 0 2rem;
-            }
-        }
-
-        &-error {
-            font-size: 0.875rem;
-            color: var(--color-primary-500);
-        }
+        width: 20rem;
+        height: 100rem;
+        background-image: radial-gradient(hsla(200, 100%, 45%, 0.15) 2%, transparent 70%);
     }
 
-}
+    &-2 {
+        top: -10rem;
+        left: 40%;
+        transform: rotate(-40deg);
+        z-index: 1;
+        width: 20rem;
+        height: 60rem;
+        background-image: radial-gradient(hsla(295, 100%, 25%, 0.25) 2%, transparent 70%);
+    }
 
-.abstract-line_svg__abstract-line {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    bottom: -45%;
-    left: 0;
+    &-3 {
+        top: -10rem;
+        left: 62%;
+        transform: rotate(-40deg);
+        z-index: 1;
+        width: 14rem;
+        height: 50rem;
+        background-image: radial-gradient(hsla(40, 100%, 45%, 0.25) 2%, transparent 70%);
+    }
+
+    &-4 {
+        top: -38rem;
+        left: 54%;
+        transform: rotate(-40deg);
+        z-index: 1;
+        width: 18rem;
+        height: 60rem;
+        background-image: radial-gradient(hsla(275, 100%, 45%, 0.25) 2%, transparent 70%);
+    }
 }
