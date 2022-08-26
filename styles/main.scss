@@ -20,5 +20,9 @@
 @tailwind utilities;
 
 ::-webkit-calendar-picker-indicator {
+    filter: invert(0);
+}
+
+.dark ::-webkit-calendar-picker-indicator {
     filter: invert(1);
 }
