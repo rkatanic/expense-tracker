@@ -2,33 +2,50 @@ import { Transaction } from "../types/Transaction";
 import { DATE_FORMAT } from "../util/dateTimeUtils";
 import { getCategoryColor } from "../util/utils";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
+import React from "react";
+import TransactionDeleteModal from "./TransactionDeleteModal";
+import UpdateTransaction from "./UpdateTransaction";
+import { useGlobalContext } from "../context/GlobalContext";
 
 interface Props {
   transaction: Transaction;
-  editTransaction: () => void;
-  deleteTransaction: () => void;
 }
 
-const TransactionTableItem = ({
-  transaction,
-  editTransaction,
-  deleteTransaction,
-}: Props): JSX.Element => {
+const TransactionTableItem = ({ transaction }: Props): JSX.Element => {
+  const { useFetchData } = useGlobalContext();
+
+  const [showUpdateModal, setShowUpdateModal] = React.useState(false);
+  const [showDeletetionModal, setShowDeletionModal] = React.useState(false);
+
+  const handleShowUpdateModalToggle = (): void => {
+    setShowUpdateModal((prevState) => !prevState);
+  };
+
+  const handleShowDeletionModalToggle = (): void => {
+    setShowDeletionModal((prevState) => !prevState);
+  };
+
+  const deleteTransaction = async (transactionId: string): Promise<void> => {
+    handleShowDeletionModalToggle();
+    await deleteTransaction(transactionId);
+    useFetchData();
+  };
+
   return (
-    <tr
+    <div
       key={transaction.id}
-      className="bg-white dark:bg-zinc-900 border-b dark:border-zinc-800"
+      className="text-sm flex w-full bg-white dark:bg-zinc-900 border-b dark:border-zinc-800"
     >
-      <td className="p-4 font-semibold text-zinc-800 dark:text-zinc-400">
+      <div className="flex-1 p-4 font-semibold text-zinc-800 dark:text-zinc-400">
         {transaction.name}
-      </td>
-      <td className="whitespace-nowrap p-4 font-semibold text-zinc-800 dark:text-zinc-400">
+      </div>
+      <div className="flex-1 whitespace-nowrap p-4 font-semibold text-zinc-800 dark:text-zinc-400">
         {transaction.value}
         <span className="ml-1 text-xs text-zinc-400 dark:text-zinc-500 font-normal">
           BAM
         </span>
-      </td>
-      <td className="hidden p-4 font-semibold md:table-cell">
+      </div>
+      <div className="flex-1 hidden p-4 font-semibold md:table-cell">
         {transaction.type === "Income" ? (
           <span className="rounded-full border text-xs font-medium px-2 py-0.5 border-emerald-400 bg-emerald-50 text-emerald-500 dark:border-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400">
             Income
@@ -38,29 +55,42 @@ const TransactionTableItem = ({
             Expense
           </span>
         )}
-      </td>
-      <td className="hidden p-4 text-zinc-500 dark:text-zinc-400 sm:flex sm:items-center sm:gap-2">
+      </div>
+      <div className="flex-2 hidden p-4 text-zinc-500 dark:text-zinc-400 sm:flex sm:items-center sm:gap-2">
         <div
           className={`w-2.5 h-2.5 rounded-full ${getCategoryColor(
             transaction?.category
           )}`}
         />
         {transaction.category}
-      </td>
-      <td className="hidden p-4 text-zinc-500 dark:text-zinc-400 lg:table-cell">
+      </div>
+      <div className="flex-1 hidden p-4 text-zinc-500 dark:text-zinc-400 lg:table-cell">
         {DATE_FORMAT.format(new Date(transaction.dateCreated))}
-      </td>
-      <td className="p-4 text-zinc-800 dark:text-zinc-400 flex justify-end gap-4">
+      </div>
+      <div className="flex-1 p-4 text-zinc-800 dark:text-zinc-400 flex justify-end gap-4">
         <FiEdit2
-          onClick={editTransaction}
+          onClick={handleShowUpdateModalToggle}
           className="stroke-zinc-500 hover:stroke-emerald-500 cursor-pointer"
         />
         <FiTrash2
-          onClick={deleteTransaction}
+          onClick={handleShowDeletionModalToggle}
           className="stroke-zinc-500 hover:stroke-rose-500 cursor-pointer"
         />
-      </td>
-    </tr>
+      </div>
+      <TransactionDeleteModal
+        isOpen={showDeletetionModal}
+        onClose={handleShowDeletionModalToggle}
+        transactionName={transaction?.name as string}
+        onDelete={(): Promise<void> =>
+          deleteTransaction(transaction?.id as string)
+        }
+      />
+      <UpdateTransaction
+        isOpen={showUpdateModal}
+        transaction={transaction as Transaction}
+        onClose={handleShowUpdateModalToggle}
+      />
+    </div>
   );
 };
 

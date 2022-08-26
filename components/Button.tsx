@@ -5,6 +5,7 @@ interface Props {
   fullWidth?: boolean;
   disabled?: boolean;
   size?: "large";
+  variant?: "primary" | "secondary";
 }
 
 const Button = ({
@@ -14,19 +15,33 @@ const Button = ({
   fullWidth,
   disabled,
   size,
-}: Props) => (
-  <button
-    className={`${
-      size === "large" ? "py-2" : "py-1.5"
-    }  shadow-sm font-semibold text-sm border border-emerald-600 bg-emerald-500
-      px-4 rounded-md text-white hover:bg-emerald-600 hover:border-emerald-700 dark:shadow-md
-       ${fullWidth ? "btn-full-width" : ""}`}
-    type={type}
-    onClick={onClick}
-    disabled={disabled}
-  >
-    {text}
-  </button>
-);
+  variant = "primary",
+}: Props) => {
+  const getButtonStyle = (): string => {
+    switch (variant) {
+      case "primary":
+        return "border-emerald-600 bg-emerald-500 hover:bg-emerald-600 hover:border-emerald-700";
+      case "secondary":
+        return "border-zinc-300 bg-zinc-50 hover:bg-zinc-100 text-zinc-800";
+      default:
+        return "border-zinc-300 bg-zinc-50 hover:bg-zinc-100 text-zinc-800";
+    }
+  };
+
+  return (
+    <button
+      className={`${
+        size === "large" ? "py-2" : "py-1.5"
+      } shadow-sm font-semibold text-sm border 
+            px-4 rounded-md text-white  dark:shadow-md
+             ${fullWidth ? "btn-full-width" : ""} ${getButtonStyle()}`}
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      {text}
+    </button>
+  );
+};
 
 export default Button;

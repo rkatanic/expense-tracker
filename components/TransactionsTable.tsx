@@ -1,6 +1,4 @@
 import * as React from "react";
-import UpdateTransaction from "./UpdateTransaction";
-import { DATE_FORMAT } from "../util/dateTimeUtils";
 import Select from "./Select";
 import IconButton from "./IconButton";
 import ArrowLeftIcon from "../assets/icons/arrow-left.svg";
@@ -25,37 +23,11 @@ const ROWS_PER_PAGE = [5, 10, 15, 20];
 
 const TransactionTable = (): JSX.Element => {
   const {
-    useFetchData,
     data: { transactions },
   } = useGlobalContext();
 
   const [rowsPerPage, setRowsPerPage] = React.useState(ROWS_PER_PAGE[0]);
   const [page, setPage] = React.useState(0);
-  const [showCreateTransaction, setShowCreateTransaction] =
-    React.useState(false);
-  const [showUpdateModal, setShowUpdateModal] = React.useState(false);
-  const [showDeletetionModal, setShowDeletionModal] = React.useState(false);
-  const [selectedTransaction, setTransaction] = React.useState<
-    Transaction | undefined
-  >(undefined);
-
-  const handleSetTransaction = (transaction: Transaction): void => {
-    setTransaction(transaction);
-  };
-
-  const handleShowUpdateModalToggle = (): void => {
-    setShowUpdateModal((prevState) => !prevState);
-  };
-
-  const handleShowDeletionModalToggle = (): void => {
-    setShowDeletionModal((prevState) => !prevState);
-  };
-
-  const deleteTransaction = async (transactionId: string): Promise<void> => {
-    handleShowDeletionModalToggle();
-    await deleteTransaction(transactionId);
-    useFetchData();
-  };
 
   const handleRowsPerPageChange = (
     e: React.ChangeEvent<HTMLSelectElement>
@@ -77,16 +49,6 @@ const TransactionTable = (): JSX.Element => {
     setPage((prevState) => prevState + 1);
   };
 
-  const handleTransactionEdit = (transaction: Transaction): void => {
-    handleSetTransaction(transaction);
-    handleShowUpdateModalToggle();
-  };
-
-  const handleTransactionDelete = (transaction: Transaction): void => {
-    handleSetTransaction(transaction);
-    handleShowDeletionModalToggle();
-  };
-
   return (
     <div className="max-w-5xl m-auto mb-4">
       <div className="flex items-end justify-between gap-4 my-4 mt-8">
@@ -100,56 +62,51 @@ const TransactionTable = (): JSX.Element => {
         </h2>
         <AddTransaction />
       </div>
-      <table className="w-full overflow-hidden rounded-md shadow-sm">
-        <tbody className="text-left text-sm border overflow-hidden dark:border-zinc-800">
-          <tr>
-            <th className="border-b p-4 bg-zinc-50 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold dark:border-zinc-800">
-              Name
-            </th>
-            <th className="border-b p-4 bg-zinc-50 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold dark:border-zinc-800">
-              Amount
-            </th>
-            <th className="hidden border-b p-4 bg-zinc-50 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold dark:border-zinc-800 md:table-cell">
-              Type
-            </th>
-            <th className="hidden border-b p-4 bg-zinc-50 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold dark:border-zinc-800 sm:table-cell">
-              Category
-            </th>
-            <th className="hidden border-b p-4 bg-zinc-50 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold dark:border-zinc-800 lg:table-cell">
-              Date created
-            </th>
-            <th className="text-right border-b p-4 bg-zinc-50 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold dark:border-zinc-800">
-              Actions
-            </th>
-          </tr>
-          {transactionsPerPageRows.map(
+      <div className="border w-full overflow-hidden rounded-md">
+        <div className="flex text-left text-sm  overflow-hidden dark:border-zinc-800">
+          <div className="flex-1 border-b p-4 bg-zinc-50 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold dark:border-zinc-800">
+            Name
+          </div>
+          <div className="flex-1 border-b p-4 bg-zinc-50 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold dark:border-zinc-800">
+            Amount
+          </div>
+          <div className="flex-1 hidden border-b p-4 bg-zinc-50 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold dark:border-zinc-800 md:table-cell">
+            Type
+          </div>
+          <div className="flex-2 hidden border-b p-4 bg-zinc-50 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold dark:border-zinc-800 sm:table-cell">
+            Category
+          </div>
+          <div className="whitespace-nowrap flex-1 hidden border-b p-4 bg-zinc-50 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold dark:border-zinc-800 lg:table-cell">
+            Date created
+          </div>
+          <div className="flex-1 text-right border-b p-4 bg-zinc-50 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold dark:border-zinc-800">
+            Actions
+          </div>
+        </div>
+        {transactionsPerPageRows.length ? (
+          transactionsPerPageRows.map(
             (transaction): JSX.Element => (
-              <TransactionTableItem
-                transaction={transaction}
-                editTransaction={() => handleTransactionEdit(transaction)}
-                deleteTransaction={() => handleTransactionDelete(transaction)}
-              />
+              <TransactionTableItem transaction={transaction} />
             )
-          )}
-        </tbody>
-      </table>
-      <TransactionDeleteModal
-        isOpen={showDeletetionModal}
-        onClose={handleShowDeletionModalToggle}
-        transactionName={selectedTransaction?.name as string}
-        onDelete={(): Promise<void> =>
-          deleteTransaction(selectedTransaction?.id as string)
-        }
-      />
-      <UpdateTransaction
-        isOpen={showUpdateModal}
-        transaction={selectedTransaction as Transaction}
-        onClose={handleShowUpdateModalToggle}
-      />
+          )
+        ) : (
+          <div className="flex flex-col gap-2 items-center justify-center p-24">
+            <FiFilePlus size="2rem" className="stroke-zinc-300" />
+            <div className="text-xl font-bold text-zinc-700">
+              No transactions
+            </div>
+            <div className="text-sm text-zinc-500 mb-2">
+              Get started by creating transaction.
+            </div>
+            <AddTransaction />
+          </div>
+        )}
+      </div>
+
       <div className="mt-4 flex justify-between">
         <div className="flex gap-4 items-center">
           <select
-            className="text-zinc-900 shadow-sm rounded-md border border-zinc-300 px-3 pr-7 py-2 text-sm focus:ring-emerald-500 focus:border-emerald-500 focus:outline-0 dark:bg-zinc-900 dark:text-zinc-100 dark:border-zinc-800"
+            className="text-zinc-900 bg-zinc-50 shadow-sm rounded-md border border-zinc-300 px-3 pr-7 py-1.5 text-sm focus:ring-emerald-500 focus:border-emerald-500 focus:outline-0 dark:bg-zinc-900 dark:text-zinc-100 dark:border-zinc-800"
             id="select"
             name="select"
             value={rowsPerPage}
@@ -165,18 +122,18 @@ const TransactionTable = (): JSX.Element => {
             Rows per page
           </span>
         </div>
-        <div className="flex bg-white border rounded-md overflow-hidden shadow-sm dark:bg-zinc-900 dark:border-zinc-800">
+        <div className="flex bg-white border border-zinc-300 rounded-md overflow-hidden shadow-sm dark:bg-zinc-900 dark:border-zinc-800">
           <button
-            className="text-sm py-3 px-4 flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-800"
+            className="text-sm py-1.5 px-3 flex items-center justify-center bg-zinc-50 hover:bg-zinc-100 dark:hover:bg-zinc-800"
             type="button"
             disabled={page === 0}
             onClick={handlePreviousPageSet}
           >
             <FiArrowLeft className="stroke-zinc-500 dark:stroke-zinc-400" />
           </button>
-          <div className="w-px h-full bg-zinc-200 dark:bg-zinc-800" />
+          <div className="w-px h-full bg-zinc-300 dark:bg-zinc-800" />
           <button
-            className="text-sm py-3 px-4 flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-800"
+            className="text-sm py-1.5 px-3 flex items-center justify-center bg-zinc-50 hover:bg-zinc-100 dark:hover:bg-zinc-800"
             type="button"
             disabled={page + 1 === totalPages}
             onClick={handleNextPageSet}

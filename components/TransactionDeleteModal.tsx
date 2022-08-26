@@ -29,7 +29,7 @@ const TransactionDeleteModal = ({
             <FiAlertTriangle size="1.5rem" className="stroke-rose-500" />
           </div>
           <div className="flex-1 text-center sm:text-left">
-            <h5 className="mb-1 flex items-start justify-center font-semibold sm:justify-between dark:text-zinc-100">
+            <h3 className="text-lg mb-1 flex items-start justify-center font-semibold sm:justify-between dark:text-zinc-100">
               Delete transaction
               <FiX
                 data-testid="x-icon"
@@ -37,7 +37,7 @@ const TransactionDeleteModal = ({
                 size="1.5rem"
                 className="hidden stroke-zinc-400 cursor-pointer sm:block"
               />
-            </h5>
+            </h3>
             <p className="text-zinc-500 text-sm dark:text-zinc-400">
               Are you sure you want to delete transaction {transactionName}?
               <br /> This action can not be undone.
