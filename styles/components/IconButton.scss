@@ -28,7 +28,7 @@
     }
 
     &-secondary {
-        border: 1px solid var(--color-gray-700);
+        border: 1px solid var(--color-zinc-700);
         background-color: transparent;
         transition: 0.25s;
 
@@ -40,7 +40,7 @@
             cursor: not-allowed;
 
             svg>path {
-                stroke: var(--color-gray-700);
+                stroke: var(--color-zinc-700);
             }
         }
 

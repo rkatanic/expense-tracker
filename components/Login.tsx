@@ -42,14 +42,14 @@ const Login = (): JSX.Element => {
         className="z-10 absolute bottom-8 right-8 cursor-pointer"
         onClick={handleDarkThemeSwitch}
       >
-        <VscColorMode className="fill-black dark:fill-gray-500" />
+        <VscColorMode className="fill-black dark:fill-zinc-500" />
       </div>
       <form className="w-full z-10 " onSubmit={onSubmit}>
         <div className="flex flex-col gap-1 mb-8 items-center">
-          <h2 className="text-4xl font-black text-gray-800 dark:text-gray-300">
+          <h2 className="text-4xl font-black text-zinc-800 dark:text-zinc-300">
             Dime Flow
           </h2>
-          <p className="text-gray-400 dark:text-gray-500">
+          <p className="text-zinc-400 dark:text-zinc-500">
             Expense tracking app
           </p>
         </div>
@@ -97,8 +97,8 @@ const Login = (): JSX.Element => {
               <path
                 d="M 100 0 L 0 0 0 100"
                 fill="none"
-                className="stroke-gray-200 dark:stroke-gray-800"
-                stroke-width="1"
+                className="stroke-zinc-200 dark:stroke-zinc-800"
+                strokeWidth="1"
               />
             </pattern>
           </defs>

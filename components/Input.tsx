@@ -35,7 +35,7 @@ const Input = ({
     <div className="w-full flex flex-col">
       {label && (
         <label
-          className="block mb-1 text-sm font-semibold text-gray-900 dark:text-gray-400"
+          className="block mb-1 text-sm font-semibold text-zinc-900 dark:text-zinc-400"
           htmlFor=""
         >
           {label}
@@ -43,8 +43,8 @@ const Input = ({
       )}
       <input
         className={`${
-          size === "large" ? "py-2.5" : "py-2 "
-        } px-3 w-full shadow-sm text-sm text-gray-900 rounded-md border bg-white border-gray-200  focus:outline-cyan-500 dark:focus:outline-0 dark:focus:border-cyan-500 dark:border-gray-700 dark:text-gray-100 dark:bg-gray-800/70`}
+          size === "large" ? "py-2" : "py-1.5"
+        } px-3 w-full shadow-sm text-sm text-zinc-900 rounded-md border bg-white border-zinc-200  focus:outline-emerald-500 dark:focus:outline-0 dark:focus:border-emerald-500 dark:border-zinc-700 dark:text-zinc-100 dark:bg-zinc-800/70`}
         required={required}
         min={min}
         max={max}

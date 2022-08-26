@@ -70,7 +70,7 @@ const TransactionsTableActions = ({ transaction }: Props): JSX.Element => {
             Update
           </div>
           <UpdateTransaction
-            toggleModal={handleModalToggle}
+            onClose={handleModalToggle}
             isOpen={showUpdateModal}
             transaction={transaction}
           />

@@ -2,14 +2,14 @@
     h2 {
         margin: 2rem 0 0;
         padding-bottom: 1rem;
-        border-bottom: 2px solid var(--color-gray-500);
+        border-bottom: 2px solid var(--color-zinc-500);
     }
 
     &-table {
         font-size: 1rem;
         width: 100%;
 
-        border-bottom: 2px solid var(--color-gray-600);
+        border-bottom: 2px solid var(--color-zinc-600);
 
         td {
             border: 0;
@@ -17,7 +17,7 @@
             width: 10rem;
 
             &:nth-child(odd) {
-                color: var(--color-gray-900);
+                color: var(--color-zinc-900);
             }
 
             &:first-child {
@@ -33,7 +33,7 @@
         .currency {
             font-size: 0.875rem;
             margin-left: 1rem;
-            color: var(--color-gray-900);
+            color: var(--color-zinc-900);
         }
 
 
@@ -54,7 +54,7 @@
                 gap: 1rem;
 
                 span {
-                    color: var(--color-gray-900);
+                    color: var(--color-zinc-900);
                     white-space: nowrap;
                 }
             }

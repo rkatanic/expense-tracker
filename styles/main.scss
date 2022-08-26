@@ -11,13 +11,14 @@
 @import "./components/Button.scss";
 @import "./components/OverviewCard.scss";
 @import "./components/Overview.scss";
-@import "./components/TransactionsTable.scss";
 @import "./components/IconButton.scss";
 @import "./components/UpdateTransaction.scss";
-@import "./components/AddTransaction.scss";
 @import "./components/Actions.scss";
-@import "./components/TransactionsTableActions.scss";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
