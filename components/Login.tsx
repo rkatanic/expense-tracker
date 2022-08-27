@@ -76,7 +76,7 @@ const Login = (): JSX.Element => {
           />
           <Button size="large" text="Sign In" type="submit" fullWidth />
         </div>
-        <div className="text-rose-600 text-sm mt-4">
+        <div className="text-rose-600 text-sm mt-4 dark:text-rose-500">
           {error && <div>{error}</div>}
         </div>
       </form>

@@ -30,7 +30,6 @@ const UpdateTransaction = ({
   const [category, setCategory] = useState(
     transaction?.category?.valueOf() ?? Category.OTHER.valueOf()
   );
-  console.log(dateCreated);
 
   const handleTransactionUpdate = async (): Promise<void> => {
     const updatedTransaction = {

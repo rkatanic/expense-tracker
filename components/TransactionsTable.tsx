@@ -20,11 +20,11 @@ const TransactionTable = (): JSX.Element => {
     setRowsPerPage(+e.target.value);
   };
 
-  const transactionsPerPageRows = transactions.slice(
+  const transactionsPerPageRows = transactions?.slice(
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
-  const totalPages = Math.ceil(transactions.length / rowsPerPage);
+  const totalPages = Math.ceil(transactions?.length / rowsPerPage);
 
   const handlePreviousPageSet = (): void => {
     setPage((prevState) => prevState - 1);
@@ -43,7 +43,7 @@ const TransactionTable = (): JSX.Element => {
           </div>
           <div className="px-2 py-1.5 flex items-center justify-center">
             <div className="bg-zinc-100 px-2 py-0.5 rounded-full text-xs dark:bg-zinc-700">
-              {transactions.length}
+              {transactions?.length}
             </div>
           </div>
         </h2>
@@ -70,8 +70,8 @@ const TransactionTable = (): JSX.Element => {
             Actions
           </div>
         </div>
-        {transactionsPerPageRows.length ? (
-          transactionsPerPageRows.map(
+        {transactionsPerPageRows?.length ? (
+          transactionsPerPageRows?.map(
             (transaction): JSX.Element => (
               <TransactionTableItem
                 key={transaction.id}

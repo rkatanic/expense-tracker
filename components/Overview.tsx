@@ -17,7 +17,7 @@ const Overview = (): JSX.Element => {
           <div>
             <h3 className="text-emerald-500">Income</h3>
             <h1 className="text-2xl font-bold dark:text-zinc-200 whitespace-nowrap">
-              {income.total}
+              {income?.total}
               <span className="ml-1 text-sm text-zinc-400 font-normal dark:text-zinc-500">
                 BAM
               </span>
@@ -25,9 +25,11 @@ const Overview = (): JSX.Element => {
           </div>
         </div>
         <div className="bg-zinc-50 p-4 font-medium border-t text-zinc-500 dark:bg-zinc-700/40 dark:text-zinc-400 dark:border-zinc-700 ">
-          <span>{income.numberOfTransactions}</span>
+          <span>{income?.numberOfTransactions}</span>
           <span className="ml-1 text-sm">
-            {income.numberOfTransactions === 1 ? "Transaction" : "Transactions"}
+            {income?.numberOfTransactions === 1
+              ? "Transaction"
+              : "Transactions"}
           </span>
         </div>
       </div>
@@ -40,7 +42,7 @@ const Overview = (): JSX.Element => {
           <div>
             <h3 className="text-rose-500">Expense</h3>
             <h1 className="text-2xl font-bold dark:text-zinc-200 whitespace-nowrap">
-              {expense.total}
+              {expense?.total}
               <span className="ml-1 text-sm text-zinc-400 font-normal dark:text-zinc-500">
                 BAM
               </span>
@@ -48,9 +50,9 @@ const Overview = (): JSX.Element => {
           </div>
         </div>
         <div className="bg-zinc-50 p-4 font-medium border-t text-zinc-500 dark:bg-zinc-700/40 dark:text-zinc-400 dark:border-zinc-700 ">
-          <span>{expense.numberOfTransactions}</span>
+          <span>{expense?.numberOfTransactions}</span>
           <span className="ml-1 text-sm">
-            {expense.numberOfTransactions === 1
+            {expense?.numberOfTransactions === 1
               ? "Transaction"
               : "Transactions"}
           </span>
@@ -67,7 +69,7 @@ const Overview = (): JSX.Element => {
               Available balance
             </h3>
             <h1 className="text-2xl font-bold dark:text-zinc-200 whitespace-nowrap">
-              {availableBalance.total}
+              {availableBalance?.total}
               <span className="ml-1 text-sm text-zinc-400 font-normal dark:text-zinc-500">
                 BAM
               </span>
@@ -75,7 +77,7 @@ const Overview = (): JSX.Element => {
           </div>
         </div>
         <div className="bg-zinc-50 p-4 font-medium border-t text-zinc-500 dark:bg-zinc-700/40 dark:text-zinc-400 dark:border-zinc-700 ">
-          <span>{availableBalance.percentage}%</span>
+          <span>{availableBalance?.percentage}%</span>
           <span className="ml-1 text-sm">Remaining</span>
         </div>
       </div>
