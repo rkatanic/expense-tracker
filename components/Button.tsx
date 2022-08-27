@@ -5,6 +5,7 @@ interface Props {
   fullWidth?: boolean;
   disabled?: boolean;
   size?: "large";
+  variant?: "primary" | "secondary" | "danger";
 }
 
 const Button = ({
@@ -14,19 +15,35 @@ const Button = ({
   fullWidth,
   disabled,
   size,
-}: Props) => (
-  <button
-    className={`${
-      size === "large" ? "py-2.5" : "py-2"
-    } bg-black border-black hover:bg-gray-800 shadow-sm font-semibold text-sm border dark:border-cyan-700 dark:bg-cyan-600
-      px-4 rounded-md text-white dark:hover:bg-cyan-700 dark:hover:border-cyan-600 dark:shadow-md
-       ${fullWidth ? "btn-full-width" : ""}`}
-    type={type}
-    onClick={onClick}
-    disabled={disabled}
-  >
-    {text}
-  </button>
-);
+  variant = "primary",
+}: Props) => {
+  const getButtonStyle = (): string => {
+    switch (variant) {
+      case "primary":
+        return "border-emerald-600 bg-emerald-500 hover:bg-emerald-600 hover:border-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600 dark:hover:border-emerald-500 dark:border-emerald-600";
+      case "danger":
+        return "border-rose-600 bg-rose-500 hover:bg-rose-600 hover:border-rose-700 dark:bg-rose-700 dark:hover:bg-rose-600 dark:hover:border-rose-500";
+      case "secondary":
+        return "border-zinc-300 bg-zinc-50 hover:bg-zinc-100 text-zinc-800 dark:bg-zinc-700 dark:text-zinc-300 dark:border-zinc-600 dark:hover:bg-zinc-600 dark:hover:border-zinc-500";
+      default:
+        return "border-zinc-300 bg-zinc-50 hover:bg-zinc-100 text-zinc-800 dark:bg-zinc-700 dark:text-zinc-300 dark:border-zinc-600 dark:hover:bg-zinc-600 dark:hover:border-zinc-500";
+    }
+  };
+
+  return (
+    <button
+      className={`${
+        size === "large" ? "py-2" : "py-1.5"
+      } shadow-sm font-semibold text-sm border 
+            px-4 rounded-md text-white  dark:shadow-md
+             ${fullWidth ? "btn-full-width" : ""} ${getButtonStyle()}`}
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      {text}
+    </button>
+  );
+};
 
 export default Button;

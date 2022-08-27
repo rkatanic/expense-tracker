@@ -15,7 +15,7 @@ export enum TransactionType {
 }
 
 export enum Category {
-  SALARY = "Salary",
+  INCOME = "Income",
   FOOD_AND_DRINKS = "Food & Drinks",
   ELECTRICITY = "Electricity",
   MEDICINE = "Medicine",

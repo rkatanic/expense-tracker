@@ -1,23 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 
-@import "./base/reset";
-
-@import "./utils/variables";
-
-@import "./components/Home.scss";
-@import "./components/Login.scss";
-@import "./components/Input.scss";
-@import "./components/Select.scss";
-@import "./components/Button.scss";
-@import "./components/OverviewCard.scss";
-@import "./components/Overview.scss";
-@import "./components/TransactionsTable.scss";
-@import "./components/IconButton.scss";
-@import "./components/UpdateTransaction.scss";
-@import "./components/AddTransaction.scss";
-@import "./components/Actions.scss";
-@import "./components/TransactionsTableActions.scss";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    html {
+        font-family: Inter, system-ui, sans-serif;
+    }
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(0);
+    opacity: 0.5;
+}
+
+.dark ::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}

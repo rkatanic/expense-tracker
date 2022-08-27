@@ -1,60 +1,60 @@
-import {
-  ChangeEvent,
-  EffectCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { EffectCallback, useEffect, useRef, useState } from "react";
 import { useAuth } from "../context/AuthUserContext";
 import { Category, Transaction, TransactionType } from "../types/Transaction";
-import Button from "./Button";
+import { updateTransaction } from "../api/transactionsApi";
 import Input from "./Input";
-import Select from "./Select";
-import { createTransaction } from "../api/transactionsApi";
+import Button from "./Button";
 import { useGlobalContext } from "../context/GlobalContext";
+import Select from "./Select";
 import { FiX } from "react-icons/fi";
 
 interface Props {
   onClose: () => void;
+  transaction: Transaction;
   isOpen: boolean;
 }
-const INITIAL_NEW_TRANSACTION = {
-  name: "",
-  value: 0,
-  type: TransactionType.EXPENSE,
-  category: Category.OTHER.valueOf(),
-  dateCreated: new Date(),
-};
-
-const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
-  const { authUser }: any = useAuth();
+const UpdateTransaction = ({
+  onClose,
+  transaction,
+  isOpen,
+}: Props): JSX.Element => {
   const { useFetchData } = useGlobalContext();
+  const { authUser }: any = useAuth();
+
   const modalRef = useRef<any>();
 
-  const [newTransaction, setNewTransaction] = useState(INITIAL_NEW_TRANSACTION);
-  const { name, type, category, dateCreated } = newTransaction;
+  const [name, setName] = useState(transaction?.name);
+  const [value, setValue] = useState(transaction?.value);
+  const [type, setType] = useState(transaction?.type);
+  const [dateCreated, setDateCreated] = useState(
+    new Date(transaction?.dateCreated)
+  );
+  const [category, setCategory] = useState(
+    transaction?.category?.valueOf() ?? Category.OTHER.valueOf()
+  );
+  console.log(dateCreated);
 
-  const handleTransactionCreate = async (
-    e: ChangeEvent<HTMLFormElement>
-  ): Promise<void> => {
-    e.preventDefault();
-
-    const transaction: Transaction = {
-      ...newTransaction,
+  const handleTransactionUpdate = async (): Promise<void> => {
+    const updatedTransaction = {
+      id: transaction.id,
       userId: authUser.uid,
+      name,
+      value,
+      type,
+      category,
       dateCreated: dateCreated.getTime(),
+      dateModified: new Date().getTime(),
     };
 
     onClose();
-    await createTransaction(transaction);
-    setNewTransaction(INITIAL_NEW_TRANSACTION);
+    await updateTransaction(updatedTransaction);
+    useFetchData();
   };
 
   useEffect((): ReturnType<EffectCallback> => {
     const handleClickOutside = (event: Event): void => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         onClose();
-        setNewTransaction(INITIAL_NEW_TRANSACTION);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -73,8 +73,8 @@ const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
           ></div>
 
           <div className="flex flex-col h-screen overflow-y-auto border-l fixed top-0 right-0 w-full max-w-sm  bg-white dark:border-zinc-700 dark:bg-zinc-800">
-            <h2 className="flex justify-between text-lg font-semibold p-4  border-b dark:text-zinc-200 dark:border-zinc-700">
-              New transaction
+            <h2 className="flex justify-between text-lg font-semibold p-4 border-b dark:text-zinc-200 dark:border-zinc-700">
+              Update transaction
               <FiX
                 onClick={onClose}
                 size="1.5rem"
@@ -82,30 +82,22 @@ const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
               />
             </h2>
             <form
-              onSubmit={handleTransactionCreate}
+              onSubmit={handleTransactionUpdate}
               className="flex-1 flex flex-col justify-between gap-6"
             >
               <div className="flex flex-col gap-6 p-4">
                 <Input
-                  onChange={(e) =>
-                    setNewTransaction({
-                      ...newTransaction,
-                      name: e.target.value,
-                    })
-                  }
+                  label="Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   required
                   type="text"
                   name="name"
-                  label="Name"
                 />
 
                 <Input
-                  onChange={(e) =>
-                    setNewTransaction({
-                      ...newTransaction,
-                      value: parseFloat(e.target.value),
-                    })
-                  }
+                  value={value || ""}
+                  onChange={(e) => setValue(parseFloat(e.target.value))}
                   required
                   type="number"
                   name="value"
@@ -115,25 +107,14 @@ const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
                 <Input
                   required
                   type="date"
-                  onChange={(e) =>
-                    setNewTransaction({
-                      ...newTransaction,
-                      dateCreated: new Date(e.target.value),
-                    })
-                  }
+                  onChange={(e) => setDateCreated(new Date(e.target.value))}
                   value={dateCreated.toISOString().substring(0, 10)}
                   label="Date created"
                 />
 
                 <Select
                   value={category}
-                  onChange={(e) =>
-                    setNewTransaction({
-                      ...newTransaction,
-                      category: e.target.value.valueOf(),
-                    })
-                  }
-                  name="category"
+                  onChange={(e) => setCategory(e.target.value.valueOf())}
                   label="Category"
                 >
                   {Object.values(Category).map(
@@ -144,7 +125,6 @@ const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
                     )
                   )}
                 </Select>
-
                 <div className="flex flex-col gap-2">
                   <span className="block mb-1 text-sm font-semibold text-zinc-900 dark:text-zinc-400">
                     Type
@@ -155,13 +135,8 @@ const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
                       id="Income"
                       value={TransactionType.INCOME}
                       checked={type === TransactionType.INCOME}
-                      onChange={() =>
-                        setNewTransaction({
-                          ...newTransaction,
-                          type: TransactionType.INCOME,
-                        })
-                      }
-                      className="cursor-pointer focus:ring-0 h-4 w-4 text-emerald-600 bg-zinc-50 border-zinc-300 dark:bg-zinc-700 dark:checked:bg-emerald-600 dark:border-zinc-500"
+                      onChange={() => setType(TransactionType.INCOME)}
+                      className="cursor-pointer focus:ring-0 h-4 w-4 text-emerald-500 bg-zinc-50 border-zinc-300 dark:bg-zinc-700 dark:checked:bg-emerald-600 dark:border-zinc-500"
                     />
                     <label
                       htmlFor="Income"
@@ -177,13 +152,8 @@ const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
                       id="Expense"
                       value={TransactionType.EXPENSE}
                       checked={type === TransactionType.EXPENSE}
-                      onChange={() =>
-                        setNewTransaction({
-                          ...newTransaction,
-                          type: TransactionType.EXPENSE,
-                        })
-                      }
-                      className="cursor-pointer focus:outline-0 focus:ring-0 h-4 w-4 text-emerald-600 bg-zinc-50 border-zinc-300 dark:bg-zinc-700 dark:checked:bg-emerald-600 dark:border-zinc-500"
+                      onChange={() => setType(TransactionType.EXPENSE)}
+                      className="cursor-pointer focus:outline-0 focus:ring-0 h-4 w-4 text-emerald-500 bg-zinc-50 border-zinc-300 dark:bg-zinc-700 dark:checked:bg-emerald-600 dark:border-zinc-500"
                     />
                     <label
                       htmlFor="Expense"
@@ -195,9 +165,9 @@ const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
                 </div>
               </div>
 
-              <div className="border-t flex justify-end gap-4  px-6 py-4 dark:border-zinc-700">
+              <div className="top-0 border-t flex justify-end gap-4 p-4 dark:border-zinc-700">
                 <Button variant="secondary" text="Cancel" onClick={onClose} />
-                <Button type="submit" text="Create" />
+                <Button type="submit" text="Update" />
               </div>
             </form>
           </div>
@@ -207,4 +177,4 @@ const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
   );
 };
 
-export default AddTransactionModal;
+export default UpdateTransaction;
