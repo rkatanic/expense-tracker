@@ -88,7 +88,10 @@ const TransactionTable = (): JSX.Element => {
         {transactionsPerPageRows.length ? (
           transactionsPerPageRows.map(
             (transaction): JSX.Element => (
-              <TransactionTableItem transaction={transaction} />
+              <TransactionTableItem
+                key={transaction.id}
+                transaction={transaction}
+              />
             )
           )
         ) : (

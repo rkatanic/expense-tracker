@@ -1,8 +1,6 @@
-import OverviewCard from "./OverviewCard";
-import CoinIcon from "../assets/icons/coin.svg";
-import FireIcon from "../assets/icons/fire.svg";
-import PigIcon from "../assets/icons/pig.svg";
 import { useGlobalContext } from "../context/GlobalContext";
+import { TbScale } from "react-icons/tb";
+import { FiTrendingUp, FiTrendingDown } from "react-icons/fi";
 
 const Overview = (): JSX.Element => {
   const {
@@ -14,21 +12,7 @@ const Overview = (): JSX.Element => {
       <div className="overflow-hidden border bg-white rounded-md shadow-sm dark:bg-zinc-800 dark:border-zinc-700 w-full flex-0 md:flex-1">
         <div className="flex items-center gap-4 mb-2 p-4">
           <div className="w-12 h-12 bg-gradient-to-b from-emerald-400 to-teal-500 rounded-md flex items-center justify-center dark:from-emerald-600 dark:to-teal-700">
-            <svg
-              className="stroke-white"
-              fill="none"
-              height="1.25rem"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              width="1.25rem"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
-              <polyline points="17 6 23 6 23 12" />
-            </svg>
+            <FiTrendingUp className="stroke-white" />
           </div>
           <div>
             <h3 className="text-emerald-500">Income</h3>
@@ -51,21 +35,7 @@ const Overview = (): JSX.Element => {
       <div className="overflow-hidden border bg-white rounded-md shadow-sm dark:bg-zinc-800 dark:border-zinc-700 w-full flex-0 md:flex-1">
         <div className="flex items-center gap-4 mb-2 p-4">
           <div className="w-12 h-12 bg-gradient-to-b from-red-400 to-rose-500 rounded-md flex items-center justify-center dark:from-red-600 dark:to-rose-700">
-            <svg
-              className="stroke-white"
-              fill="none"
-              height="1.25rem"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              width="1.25rem"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <polyline points="23 18 13.5 8.5 8.5 13.5 1 6" />
-              <polyline points="17 18 23 18 23 12" />
-            </svg>
+            <FiTrendingDown className="stroke-white" />
           </div>
           <div>
             <h3 className="text-rose-500">Expense</h3>
@@ -90,26 +60,7 @@ const Overview = (): JSX.Element => {
       <div className="overflow-hidden border bg-white rounded-md shadow-sm dark:bg-zinc-800 dark:border-zinc-700 w-full flex-0 md:flex-1">
         <div className="flex items-center gap-4 mb-2 p-4">
           <div className="w-12 h-12 bg-gradient-to-b from-slate-400 to-zinc-500 rounded-md flex items-center justify-center dark:from-slate-600 dark:to-zinc-700">
-            <svg
-              className="stroke-white"
-              fill="none"
-              height="1.25rem"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              width="1.25rem"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <desc />
-              <path d="M0 0h24v24H0z" fill="none" stroke="none" />
-              <line x1="7" x2="17" y1="20" y2="20" />
-              <path d="M6 6l6 -1l6 1" />
-              <line x1="12" x2="12" y1="3" y2="20" />
-              <path d="M9 12l-3 -6l-3 6a3 3 0 0 0 6 0" />
-              <path d="M21 12l-3 -6l-3 6a3 3 0 0 0 6 0" />
-            </svg>
+            <TbScale className="stroke-white" />
           </div>
           <div>
             <h3 className="text-slate-500 whitespace-nowrap">
