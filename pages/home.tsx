@@ -57,7 +57,7 @@ const Home = (): JSX.Element | null => {
             </button>
 
             <div className="flex justify-between">
-              <div className="home-date-range">
+              <div className="flex gap-4">
                 <Input
                   type="date"
                   onChange={(e) => useSetStartDate(new Date(e.target.value))}

@@ -40,7 +40,7 @@ const Navbar = ({ showMenu, toggleShowMenu }: Props): JSX.Element => {
             </div>
             <FiX
               size="1.5rem"
-              className="xl:hidden dark:stroke-zinc-400"
+              className="stroke-zinc-500 xl:hidden dark:stroke-zinc-400"
               onClick={toggleShowMenu}
             />
           </div>
