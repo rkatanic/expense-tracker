@@ -12,9 +12,9 @@ import { FiMenu } from "react-icons/fi";
 const Home = (): JSX.Element | null => {
   const {
     dateRange: { start, end },
-    useSetStartDate,
-    useSetEndDate,
-    useFetchData,
+    setStartDate,
+    setEndDate,
+    fetchData,
   } = useGlobalContext();
   const { authUser } = useAuth();
   const router = useRouter();
@@ -30,7 +30,7 @@ const Home = (): JSX.Element | null => {
   }, [authUser, router]);
 
   useEffect((): ReturnType<EffectCallback> => {
-    useFetchData();
+    fetchData();
   }, []);
 
   if (!authUser) return null;
@@ -56,15 +56,15 @@ const Home = (): JSX.Element | null => {
               <div className="flex gap-4">
                 <Input
                   type="date"
-                  onChange={(e) => useSetStartDate(new Date(e.target.value))}
+                  onChange={(e) => setStartDate(new Date(e.target.value))}
                   value={start.toISOString().substring(0, 10)}
                 />
                 <Input
                   type="date"
-                  onChange={(e) => useSetEndDate(new Date(e.target.value))}
+                  onChange={(e) => setEndDate(new Date(e.target.value))}
                   value={end.toISOString().substring(0, 10)}
                 />
-                <Button onClick={useFetchData} text="Apply" />
+                <Button onClick={fetchData} text="Apply" />
               </div>
             </div>
           </div>

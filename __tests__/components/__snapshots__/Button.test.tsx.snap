@@ -4,7 +4,9 @@ exports[`Button should render 1`] = `
 <body>
   <div>
     <button
-      class="btn-primary btn-full-width"
+      class="py-1.5 shadow-sm font-semibold text-sm border 
+            px-4 rounded-md dark:shadow-md
+             btn-full-width border-emerald-600 bg-emerald-500 text-white hover:bg-emerald-600 hover:border-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600 dark:hover:border-emerald-500 dark:border-emerald-600"
       type="button"
     >
       button

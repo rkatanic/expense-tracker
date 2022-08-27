@@ -12,7 +12,7 @@ interface Props {
 }
 
 const TransactionTableItem = ({ transaction }: Props): JSX.Element => {
-  const { useFetchData } = useGlobalContext();
+  const { fetchData } = useGlobalContext();
 
   const [showUpdateModal, setShowUpdateModal] = React.useState(false);
   const [showDeletetionModal, setShowDeletionModal] = React.useState(false);
@@ -28,7 +28,7 @@ const TransactionTableItem = ({ transaction }: Props): JSX.Element => {
   const deleteTransaction = async (transactionId: string): Promise<void> => {
     handleShowDeletionModalToggle();
     await deleteTransaction(transactionId);
-    useFetchData();
+    fetchData();
   };
 
   return (

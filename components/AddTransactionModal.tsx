@@ -1,17 +1,10 @@
-import {
-  ChangeEvent,
-  EffectCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { ChangeEvent, useState } from "react";
 import { useAuth } from "../context/AuthUserContext";
 import { Category, Transaction, TransactionType } from "../types/Transaction";
 import Button from "./Button";
 import Input from "./Input";
 import Select from "./Select";
 import { createTransaction } from "../api/transactionsApi";
-import { useGlobalContext } from "../context/GlobalContext";
 import { FiX } from "react-icons/fi";
 
 interface Props {
@@ -28,11 +21,9 @@ const INITIAL_NEW_TRANSACTION = {
 
 const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
   const { authUser }: any = useAuth();
-  const { useFetchData } = useGlobalContext();
-  const modalRef = useRef<any>();
 
   const [newTransaction, setNewTransaction] = useState(INITIAL_NEW_TRANSACTION);
-  const { name, type, category, dateCreated } = newTransaction;
+  const { name, value, type, category, dateCreated } = newTransaction;
 
   const handleTransactionCreate = async (
     e: ChangeEvent<HTMLFormElement>
@@ -49,19 +40,6 @@ const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
     await createTransaction(transaction);
     setNewTransaction(INITIAL_NEW_TRANSACTION);
   };
-
-  useEffect((): ReturnType<EffectCallback> => {
-    const handleClickOutside = (event: Event): void => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        onClose();
-        setNewTransaction(INITIAL_NEW_TRANSACTION);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return (): void =>
-      document.removeEventListener("mousedown", handleClickOutside);
-  }, [modalRef]);
 
   return (
     <>
@@ -97,6 +75,7 @@ const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
                   type="text"
                   name="name"
                   label="Name"
+                  value={name}
                 />
 
                 <Input
@@ -110,6 +89,7 @@ const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
                   type="number"
                   name="value"
                   label="Value"
+                  value={value}
                 />
 
                 <Input

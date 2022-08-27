@@ -26,9 +26,9 @@ const globalContext = createContext({
   isLoading: false,
   data: INITIAL_DATA,
   useSetIsLoading: (isLoading: boolean) => {},
-  useSetStartDate: (date: Date) => {},
-  useSetEndDate: (date: Date) => {},
-  useFetchData: () => {},
+  setStartDate: (date: Date) => {},
+  setEndDate: (date: Date) => {},
+  fetchData: () => {},
 });
 
 export const GlobalContextProvider = ({ children }: any): JSX.Element => {
@@ -43,15 +43,15 @@ export const GlobalContextProvider = ({ children }: any): JSX.Element => {
     setIsLoading(isLoading);
   };
 
-  const useSetStartDate = (date: Date) => {
+  const setStartDate = (date: Date) => {
     setDateRange((prevState) => ({ ...prevState, start: date }));
   };
 
-  const useSetEndDate = (date: Date) => {
+  const setEndDate = (date: Date) => {
     setDateRange((prevState) => ({ ...prevState, end: date }));
   };
 
-  const useFetchData = async (): Promise<void> => {
+  const fetchData = async (): Promise<void> => {
     setIsLoading(true);
     const res = await getAllTransactionsInDateRange(
       dateRange.start.getTime(),
@@ -69,9 +69,9 @@ export const GlobalContextProvider = ({ children }: any): JSX.Element => {
         isLoading,
         data,
         useSetIsLoading,
-        useSetStartDate,
-        useSetEndDate,
-        useFetchData,
+        setStartDate,
+        setEndDate,
+        fetchData,
       }}
     >
       {children}

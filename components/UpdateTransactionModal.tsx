@@ -1,4 +1,4 @@
-import { EffectCallback, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../context/AuthUserContext";
 import { Category, Transaction, TransactionType } from "../types/Transaction";
 import { updateTransaction } from "../api/transactionsApi";
@@ -18,10 +18,8 @@ const UpdateTransaction = ({
   transaction,
   isOpen,
 }: Props): JSX.Element => {
-  const { useFetchData } = useGlobalContext();
+  const { fetchData } = useGlobalContext();
   const { authUser }: any = useAuth();
-
-  const modalRef = useRef<any>();
 
   const [name, setName] = useState(transaction?.name);
   const [value, setValue] = useState(transaction?.value);
@@ -48,20 +46,8 @@ const UpdateTransaction = ({
 
     onClose();
     await updateTransaction(updatedTransaction);
-    useFetchData();
+    fetchData();
   };
-
-  useEffect((): ReturnType<EffectCallback> => {
-    const handleClickOutside = (event: Event): void => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        onClose();
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return (): void =>
-      document.removeEventListener("mousedown", handleClickOutside);
-  }, [modalRef]);
 
   return (
     <>
