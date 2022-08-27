@@ -1,4 +1,5 @@
 import { FiX, FiAlertTriangle } from "react-icons/fi";
+import Button from "./Button";
 
 interface Props {
   isOpen: boolean;
@@ -18,7 +19,7 @@ const TransactionDeleteModal = ({
       <div
         data-testid="delete-file-modal-overlay"
         onClick={onClose}
-        className="fixed inset-0 bg-zinc-500/50 dark:bg-zinc-900"
+        className="fixed inset-0 bg-zinc-500/50 dark:bg-zinc-900/80"
       ></div>
       <div
         data-testid="delete-file-modal"
@@ -45,20 +46,8 @@ const TransactionDeleteModal = ({
           </div>
         </div>
         <div className="flex flex-col gap-4 justify-end sm:flex-row">
-          <button
-            onClick={onClose}
-            type="button"
-            className="order-2 shadow-sm font-semibold text-sm border bg-zinc-50 border-zinc-300 px-4 py-1.5 rounded-md text-zinc-900 hover:bg-zinc-100 sm:order-1 dark:shadow-md dark:text-zinc-100 dark:hover:bg-zinc-700 dark:border-zinc-500"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={onDelete}
-            type="button"
-            className="order-1 shadow-sm font-semibold text-sm border border-rose-700 bg-rose-600 px-4 py-1.5 rounded-md text-white hover:bg-rose-700 hover:border-rose-800 dark:shadow-md dark:bg-rose-800 dark:hover:bg-rose-900"
-          >
-            Delete
-          </button>
+          <Button variant="secondary" text="Cancel" onClick={onClose} />
+          <Button variant="danger" text="Delete" onClick={onDelete} />
         </div>
       </div>
     </>

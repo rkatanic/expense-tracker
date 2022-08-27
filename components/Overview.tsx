@@ -11,7 +11,7 @@ const Overview = (): JSX.Element => {
 
   return (
     <div className="flex gap-4 flex-wrap">
-      <div className="overflow-hidden flex-1 border bg-white rounded-md shadow-sm dark:bg-zinc-900 dark:border-zinc-800">
+      <div className="overflow-hidden border bg-white rounded-md shadow-sm dark:bg-zinc-800 dark:border-zinc-700 w-full flex-0 md:flex-1">
         <div className="flex items-center gap-4 mb-2 p-4">
           <div className="w-12 h-12 bg-gradient-to-b from-emerald-400 to-teal-500 rounded-md flex items-center justify-center dark:from-emerald-600 dark:to-teal-700">
             <svg
@@ -40,14 +40,15 @@ const Overview = (): JSX.Element => {
             </h1>
           </div>
         </div>
-        <div className="bg-zinc-50 p-4 font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
+        <div className="bg-zinc-50 p-4 font-medium border-t text-zinc-500 dark:bg-zinc-700/40 dark:text-zinc-400 dark:border-zinc-700 ">
           <span>{income.numberOfTransactions}</span>
           <span className="ml-1 text-sm">
             {income.numberOfTransactions === 1 ? "Transaction" : "Transactions"}
           </span>
         </div>
       </div>
-      <div className="overflow-hidden flex-1 border bg-white rounded-md shadow-sm dark:bg-zinc-900 dark:border-zinc-800">
+
+      <div className="overflow-hidden border bg-white rounded-md shadow-sm dark:bg-zinc-800 dark:border-zinc-700 w-full flex-0 md:flex-1">
         <div className="flex items-center gap-4 mb-2 p-4">
           <div className="w-12 h-12 bg-gradient-to-b from-red-400 to-rose-500 rounded-md flex items-center justify-center dark:from-red-600 dark:to-rose-700">
             <svg
@@ -76,7 +77,7 @@ const Overview = (): JSX.Element => {
             </h1>
           </div>
         </div>
-        <div className="bg-zinc-50 p-4 font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
+        <div className="bg-zinc-50 p-4 font-medium border-t text-zinc-500 dark:bg-zinc-700/40 dark:text-zinc-400 dark:border-zinc-700 ">
           <span>{expense.numberOfTransactions}</span>
           <span className="ml-1 text-sm">
             {expense.numberOfTransactions === 1
@@ -85,7 +86,8 @@ const Overview = (): JSX.Element => {
           </span>
         </div>
       </div>
-      <div className="overflow-hidden flex-1 border bg-white rounded-md shadow-sm dark:bg-zinc-900 dark:border-zinc-800">
+
+      <div className="overflow-hidden border bg-white rounded-md shadow-sm dark:bg-zinc-800 dark:border-zinc-700 w-full flex-0 md:flex-1">
         <div className="flex items-center gap-4 mb-2 p-4">
           <div className="w-12 h-12 bg-gradient-to-b from-slate-400 to-zinc-500 rounded-md flex items-center justify-center dark:from-slate-600 dark:to-zinc-700">
             <svg
@@ -121,7 +123,7 @@ const Overview = (): JSX.Element => {
             </h1>
           </div>
         </div>
-        <div className="bg-zinc-50 p-4 font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
+        <div className="bg-zinc-50 p-4 font-medium border-t text-zinc-500 dark:bg-zinc-700/40 dark:text-zinc-400 dark:border-zinc-700 ">
           <span>{availableBalance.percentage}%</span>
           <span className="ml-1 text-sm">Remaining</span>
         </div>

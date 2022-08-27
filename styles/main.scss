@@ -21,6 +21,7 @@
 
 ::-webkit-calendar-picker-indicator {
     filter: invert(0);
+    opacity: 0.5;
 }
 
 .dark ::-webkit-calendar-picker-indicator {

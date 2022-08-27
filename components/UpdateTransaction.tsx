@@ -74,7 +74,7 @@ const UpdateTransaction = ({
           ></div>
 
           <div className="flex flex-col h-screen overflow-y-auto border-l fixed top-0 right-0 w-full max-w-sm  bg-white dark:border-zinc-700 dark:bg-zinc-800">
-            <h2 className="flex justify-between text-lg font-semibold p-4  border-b dark:text-zinc-300 dark:border-zinc-700">
+            <h2 className="flex justify-between text-lg font-semibold p-4 border-b dark:text-zinc-200 dark:border-zinc-700">
               Update transaction
               <FiX
                 onClick={onClose}

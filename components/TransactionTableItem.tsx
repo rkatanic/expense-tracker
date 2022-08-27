@@ -34,7 +34,7 @@ const TransactionTableItem = ({ transaction }: Props): JSX.Element => {
   return (
     <div
       key={transaction.id}
-      className="text-sm flex w-full bg-white dark:bg-zinc-900 border-b dark:border-zinc-800"
+      className="text-sm flex w-full bg-white dark:bg-zinc-800 border-t dark:border-zinc-700"
     >
       <div className="flex-1 p-4 font-semibold text-zinc-800 dark:text-zinc-400">
         {transaction.name}

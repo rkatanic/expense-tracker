@@ -37,7 +37,7 @@ const Login = (): JSX.Element => {
   }, [authUser]);
 
   return (
-    <div className="h-screen max-w-md m-auto overflow-hidden flex items-center justify-center px-8">
+    <div className="h-screen max-w-md m-auto overflow-hidden flex items-center justify-center">
       <div
         className="z-10 absolute bottom-8 right-8 cursor-pointer"
         onClick={handleDarkThemeSwitch}
