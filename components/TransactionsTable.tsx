@@ -1,21 +1,6 @@
 import * as React from "react";
-import Select from "./Select";
-import IconButton from "./IconButton";
-import ArrowLeftIcon from "../assets/icons/arrow-left.svg";
-import ArrowRightIcon from "../assets/icons/arrow-right.svg";
 import { useGlobalContext } from "../context/GlobalContext";
-import TransactionsTableActions from "./TransactionsTableActions";
-import {
-  FiArrowLeft,
-  FiArrowRight,
-  FiEdit2,
-  FiTrash2,
-  FiFilePlus,
-} from "react-icons/fi";
-import { Category, Transaction, TransactionType } from "../types/Transaction";
-import TransactionDeleteModal from "./TransactionDeleteModal";
-import { deleteTransaction } from "../api/transactionsApi";
-import Button from "./Button";
+import { FiArrowLeft, FiArrowRight, FiFilePlus } from "react-icons/fi";
 import AddTransaction from "./AddTransaction";
 import TransactionTableItem from "./TransactionTableItem";
 

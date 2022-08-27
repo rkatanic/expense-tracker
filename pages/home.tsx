@@ -1,13 +1,10 @@
 import { EffectCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../context/AuthUserContext";
+import { useGlobalContext } from "../context/GlobalContext";
 import TransactionTable from "../components/TransactionsTable";
 import Overview from "../components/Overview";
-import Actions from "../components/Actions";
 import Input from "../components/Input";
-import ReloadIcon from "../assets/icons/reload.svg";
-import IconButton from "../components/IconButton";
-import { useGlobalContext } from "../context/GlobalContext";
 import Sidenav from "../components/Sidenav";
 import Button from "../components/Button";
 import { FiMenu } from "react-icons/fi";
@@ -15,7 +12,6 @@ import { FiMenu } from "react-icons/fi";
 const Home = (): JSX.Element | null => {
   const {
     dateRange: { start, end },
-    isLoading,
     useSetStartDate,
     useSetEndDate,
     useFetchData,

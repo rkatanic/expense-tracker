@@ -4,7 +4,6 @@ import { Category, Transaction, TransactionType } from "../types/Transaction";
 import { updateTransaction } from "../api/transactionsApi";
 import Input from "./Input";
 import Button from "./Button";
-import XIcon from "../assets/icons/x.svg";
 import { useGlobalContext } from "../context/GlobalContext";
 import Select from "./Select";
 import { FiX } from "react-icons/fi";

@@ -10,7 +10,6 @@ import { Category, Transaction, TransactionType } from "../types/Transaction";
 import Button from "./Button";
 import Input from "./Input";
 import Select from "./Select";
-import XIcon from "../assets/icons/x.svg";
 import { createTransaction } from "../api/transactionsApi";
 import { useGlobalContext } from "../context/GlobalContext";
 import { FiX } from "react-icons/fi";

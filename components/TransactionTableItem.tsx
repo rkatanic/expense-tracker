@@ -4,7 +4,7 @@ import { getCategoryColor } from "../util/utils";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import React from "react";
 import TransactionDeleteModal from "./TransactionDeleteModal";
-import UpdateTransaction from "./UpdateTransaction";
+import UpdateTransactionModal from "./UpdateTransactionModal";
 import { useGlobalContext } from "../context/GlobalContext";
 
 interface Props {
@@ -85,7 +85,7 @@ const TransactionTableItem = ({ transaction }: Props): JSX.Element => {
           deleteTransaction(transaction?.id as string)
         }
       />
-      <UpdateTransaction
+      <UpdateTransactionModal
         isOpen={showUpdateModal}
         transaction={transaction as Transaction}
         onClose={handleShowUpdateModalToggle}
