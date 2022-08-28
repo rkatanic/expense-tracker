@@ -96,7 +96,7 @@ const TransactionTable = (): JSX.Element => {
       <div className="mt-4 flex justify-between">
         <div className="flex gap-4 items-center">
           <select
-            className="text-zinc-900 bg-zinc-50 shadow-sm rounded-md border border-zinc-300 px-3 pr-7 py-1.5 text-sm focus:ring-emerald-500 focus:border-emerald-500 focus:outline-0 dark:bg-zinc-700 dark:text-zinc-100 dark:border-zinc-500"
+            className="text-zinc-900 bg-zinc-50 shadow-sm rounded-md border border-zinc-300 px-3 pr-7 py-1.5 text-sm focus:ring-sky-500 focus:border-sky-500 focus:outline-0 dark:bg-zinc-700 dark:text-zinc-100 dark:border-zinc-500"
             id="select"
             name="select"
             value={rowsPerPage}
