@@ -81,11 +81,11 @@ const TransactionTable = (): JSX.Element => {
           )
         ) : (
           <div className="flex flex-col gap-2 items-center justify-center p-24">
-            <FiFilePlus size="2rem" className="stroke-zinc-300" />
-            <div className="text-xl font-bold text-zinc-700 dark:text-zinc-200">
+            <FiFilePlus size="2rem" className="stroke-zinc-400" />
+            <div className="text-xl font-bold text-zinc-700 dark:text-zinc-100">
               No transactions
             </div>
-            <div className="text-sm text-zinc-500 mb-2">
+            <div className="text-sm text-zinc-400 mb-2">
               Get started by creating transaction.
             </div>
             <AddTransaction />

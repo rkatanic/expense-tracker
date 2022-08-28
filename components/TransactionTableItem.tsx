@@ -68,7 +68,7 @@ const TransactionTableItem = ({ transaction }: Props): JSX.Element => {
       <div className="flex-1 p-4 text-zinc-800 dark:text-zinc-400 flex justify-end gap-4">
         <FiEdit2
           onClick={handleShowUpdateModalToggle}
-          className="stroke-zinc-400 hover:stroke-emerald-500 cursor-pointer"
+          className="stroke-zinc-400 hover:stroke-sky-500 cursor-pointer"
         />
         <FiTrash2
           onClick={handleShowDeletionModalToggle}

@@ -42,7 +42,7 @@ const Input = ({
     <input
       className={`${
         size === "large" ? "py-2" : "py-1.5"
-      } px-3 w-full text-sm text-zinc-900 rounded-md border bg-zinc-50 border-zinc-300  focus:outline-emerald-500 dark:focus:outline-0 dark:focus:border-emerald-500 dark:border-zinc-500 dark:text-zinc-100 dark:bg-zinc-900`}
+      } px-3 w-full text-sm text-zinc-900 rounded-md border bg-zinc-50 border-zinc-300 focus:border-sky-400 focus:ring-sky-400 dark:focus:ring-sky-500 focus:outline-0 dark:border-zinc-500 dark:text-zinc-100 dark:bg-zinc-900`}
       required={required}
       min={min}
       max={max}

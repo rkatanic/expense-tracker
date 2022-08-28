@@ -4,9 +4,7 @@ import { useAuth } from "../context/AuthUserContext";
 import { useGlobalContext } from "../context/GlobalContext";
 import TransactionTable from "../components/TransactionsTable";
 import Overview from "../components/Overview";
-import Input from "../components/Input";
 import Sidenav from "../components/Sidenav";
-import Button from "../components/Button";
 import { FiMenu } from "react-icons/fi";
 
 const Home = (): JSX.Element | null => {
@@ -53,18 +51,27 @@ const Home = (): JSX.Element | null => {
             </button>
 
             <div className="flex justify-between">
-              <div className="flex gap-4">
-                <Input
+              <div className="flex items-center gap-0 border rounded-md overflow-hidden bg-zinc-50 dark:border-zinc-500 h-9 dark:bg-zinc-700">
+                <input
+                  className="text-sm bg-transparent border-0 dark:text-zinc-300"
                   type="date"
                   onChange={(e) => setStartDate(new Date(e.target.value))}
                   value={start.toISOString().substring(0, 10)}
                 />
-                <Input
+                <div className="dark:text-zinc-300">-</div>
+                <input
+                  className="text-sm bg-transparent border-0 dark:text-zinc-300"
                   type="date"
                   onChange={(e) => setEndDate(new Date(e.target.value))}
                   value={end.toISOString().substring(0, 10)}
                 />
-                <Button variant="secondary" onClick={fetchData} text="Search" />
+                <button
+                  className="h-full border-l dark:border-zinc-500 px-4 hover:bg-sky-500 hover:text-white dark:text-zinc-300 text-sm font-semibold dark:hover:text-white"
+                  type="button"
+                  onClick={fetchData}
+                >
+                  Search
+                </button>
               </div>
             </div>
           </div>

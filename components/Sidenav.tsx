@@ -33,8 +33,8 @@ const Navbar = ({ showMenu, toggleShowMenu }: Props): JSX.Element => {
         <div className="flex flex-col gap-8">
           <div className="flex gap-4 items-center justify-between">
             <div className="flex gap-4">
-              <div className="w-8 h-8 rounded-full border-8 border-emerald-500" />
-              <span className="text-2xl font-black text-zinc-600 dark:text-zinc-200">
+              <div className="w-8 h-8 rounded-full border-8 border-sky-500 dark:border-sky-400" />
+              <span className="text-2xl font-black text-zinc-500 dark:text-zinc-300">
                 DimeFlow
               </span>
             </div>
@@ -71,7 +71,7 @@ const Navbar = ({ showMenu, toggleShowMenu }: Props): JSX.Element => {
                 value=""
                 onChange={handleDarkThemeSwitch}
               />
-              <div className="w-9 h-5 bg-zinc-200 peer-focus:outline-none peer-focus:ring-0 rounded-full peer dark:bg-zinc-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-zinc-600 peer-checked:bg-emerald-600" />
+              <div className="w-9 h-5 bg-zinc-200 peer-focus:outline-none peer-focus:ring-0 rounded-full peer dark:bg-zinc-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-zinc-600 peer-checked:bg-sky-500" />
               <span className="ml-4 text-sm font-semibold text-zinc-600 dark:text-zinc-300">
                 Dark mode
               </span>

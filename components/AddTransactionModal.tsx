@@ -41,12 +41,17 @@ const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
     setNewTransaction(INITIAL_NEW_TRANSACTION);
   };
 
+  const handleModalClose = (): void => {
+    setNewTransaction(INITIAL_NEW_TRANSACTION);
+    onClose();
+  };
+
   return (
     <>
       {isOpen ? (
         <>
           <div
-            onClick={onClose}
+            onClick={handleModalClose}
             className="fixed inset-0 bg-zinc-500/50 dark:bg-zinc-900/80"
           ></div>
 
@@ -54,7 +59,7 @@ const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
             <h2 className="flex justify-between text-lg font-semibold p-4  border-b dark:text-zinc-200 dark:border-zinc-600">
               New transaction
               <FiX
-                onClick={onClose}
+                onClick={handleModalClose}
                 size="1.5rem"
                 className="stroke-zinc-400 cursor-pointer"
               />
@@ -141,7 +146,7 @@ const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
                           type: TransactionType.INCOME,
                         })
                       }
-                      className="cursor-pointer focus:ring-0 h-4 w-4 text-emerald-600 bg-zinc-50 border-zinc-300 dark:bg-zinc-700 dark:checked:bg-emerald-600 dark:border-zinc-600"
+                      className="cursor-pointer focus:ring-0 h-4 w-4 bg-zinc-50 border-zinc-300 dark:bg-zinc-700 checked:bg-sky-400 dark:checked:bg-sky-400 dark:border-zinc-600"
                     />
                     <label
                       htmlFor="Income"
@@ -163,7 +168,7 @@ const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
                           type: TransactionType.EXPENSE,
                         })
                       }
-                      className="cursor-pointer focus:outline-0 focus:ring-0 h-4 w-4 text-emerald-600 bg-zinc-50 border-zinc-300 dark:bg-zinc-700 dark:checked:bg-emerald-600 dark:border-zinc-600"
+                      className="cursor-pointer focus:ring-0 h-4 w-4 bg-zinc-50 border-zinc-300 dark:bg-zinc-700 checked:bg-sky-400 dark:checked:bg-sky-400 dark:border-zinc-600"
                     />
                     <label
                       htmlFor="Expense"
@@ -176,7 +181,11 @@ const AddTransactionModal = ({ onClose, isOpen }: Props): JSX.Element => {
               </div>
 
               <div className="border-t flex justify-end gap-4  px-6 py-4 dark:border-zinc-600">
-                <Button variant="secondary" text="Cancel" onClick={onClose} />
+                <Button
+                  variant="secondary"
+                  text="Cancel"
+                  onClick={handleModalClose}
+                />
                 <Button type="submit" text="Create" />
               </div>
             </form>

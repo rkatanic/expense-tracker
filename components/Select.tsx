@@ -24,7 +24,7 @@ const Select = ({
     )}
     <select
       data-testid="select"
-      className="w-full text-zinc-900 rounded-md border bg-zinc-50 border-zinc-300 px-3 pr-9 py-1.5 text-sm focus:ring-emerald-500  focus:outline-0 dark:text-zinc-100 dark:bg-zinc-900 dark:border-zinc-500"
+      className="w-full text-zinc-900 rounded-md border bg-zinc-50 border-zinc-300 px-3 pr-9 py-1.5 text-sm focus:ring-sky-500  focus:outline-0 dark:text-zinc-100 dark:bg-zinc-900 dark:border-zinc-500"
       value={value}
       onChange={onChange}
     >
