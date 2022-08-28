@@ -37,19 +37,19 @@ const Login = (): JSX.Element => {
   }, [authUser]);
 
   return (
-    <div className="h-screen max-w-md m-auto overflow-hidden flex items-center justify-center">
+    <div className="h-screen m-auto overflow-hidden flex items-center justify-center dark:bg-zinc-800">
       <div
         className="z-10 absolute bottom-8 right-8 cursor-pointer"
         onClick={handleDarkThemeSwitch}
       >
-        <VscColorMode className="fill-black dark:fill-zinc-500" />
+        <VscColorMode className="fill-zinc-700 dark:fill-zinc-400" />
       </div>
-      <form className="w-full z-10 " onSubmit={onSubmit}>
+      <form className="w-full max-w-md z-10 " onSubmit={onSubmit}>
         <div className="flex flex-col gap-1 mb-8 items-center">
-          <h2 className="text-4xl font-black text-zinc-800 dark:text-zinc-300">
+          <h2 className="text-4xl font-black text-zinc-800 dark:text-zinc-200">
             Dime Flow
           </h2>
-          <p className="text-zinc-400 dark:text-zinc-500">
+          <p className="text-zinc-400 dark:text-zinc-400">
             Expense tracking app
           </p>
         </div>
@@ -76,7 +76,7 @@ const Login = (): JSX.Element => {
           />
           <Button size="large" text="Sign In" type="submit" fullWidth />
         </div>
-        <div className="text-rose-600 text-sm mt-4 dark:text-rose-500">
+        <div className="text-red-600 text-sm mt-4 dark:text-red-500">
           {error && <div>{error}</div>}
         </div>
       </form>
@@ -97,7 +97,7 @@ const Login = (): JSX.Element => {
               <path
                 d="M 100 0 L 0 0 0 100"
                 fill="none"
-                className="stroke-zinc-200 dark:stroke-zinc-800"
+                className="stroke-zinc-200 dark:stroke-zinc-700"
                 strokeWidth="1"
               />
             </pattern>

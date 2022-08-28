@@ -34,24 +34,22 @@ const TransactionTableItem = ({ transaction }: Props): JSX.Element => {
   return (
     <div
       key={transaction.id}
-      className="text-sm flex w-full bg-white dark:bg-zinc-800 border-t dark:border-zinc-700"
+      className="text-sm flex w-full bg-white dark:bg-zinc-800 border-t dark:border-zinc-600"
     >
-      <div className="flex-1 p-4 font-semibold text-zinc-800 dark:text-zinc-400">
+      <div className="flex-1 p-4 font-semibold text-zinc-800 dark:text-zinc-300">
         {transaction.name}
       </div>
-      <div className="flex-1 whitespace-nowrap p-4 font-semibold text-zinc-800 dark:text-zinc-400">
+      <div className="flex-1 whitespace-nowrap p-4 font-semibold text-zinc-800 dark:text-zinc-300">
         {transaction.value}
-        <span className="ml-1 text-xs text-zinc-400 dark:text-zinc-500 font-normal">
-          BAM
-        </span>
+        <span className="ml-1 text-xs text-zinc-400 font-normal">BAM</span>
       </div>
       <div className="flex-1 hidden p-4 font-semibold md:table-cell">
         {transaction.type === "Income" ? (
-          <span className="rounded-full border text-xs font-medium px-2 py-0.5 border-emerald-400 bg-emerald-50 text-emerald-500 dark:border-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400">
+          <span className="rounded-full border text-xs font-medium px-2 py-0.5 border-emerald-300 bg-emerald-50 text-emerald-600 dark:border-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">
             Income
           </span>
         ) : (
-          <span className="rounded-full border text-xs font-medium px-2 py-0.5 border-zinc-400 bg-zinc-50 text-zinc-500 dark:border-zinc-600 dark:bg-zinc-500/10 dark:text-zinc-400">
+          <span className="rounded-full border text-xs font-medium px-2 py-0.5 border-zinc-300 bg-zinc-50 text-zinc-500 dark:border-zinc-500 dark:bg-zinc-700 dark:text-zinc-400">
             Expense
           </span>
         )}
@@ -70,11 +68,11 @@ const TransactionTableItem = ({ transaction }: Props): JSX.Element => {
       <div className="flex-1 p-4 text-zinc-800 dark:text-zinc-400 flex justify-end gap-4">
         <FiEdit2
           onClick={handleShowUpdateModalToggle}
-          className="stroke-zinc-500 hover:stroke-emerald-500 cursor-pointer"
+          className="stroke-zinc-400 hover:stroke-emerald-500 cursor-pointer"
         />
         <FiTrash2
           onClick={handleShowDeletionModalToggle}
-          className="stroke-zinc-500 hover:stroke-rose-500 cursor-pointer"
+          className="stroke-zinc-400 hover:stroke-red-500 cursor-pointer"
         />
       </div>
       <TransactionDeleteModal

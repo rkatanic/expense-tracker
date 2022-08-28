@@ -39,7 +39,7 @@ const Home = (): JSX.Element | null => {
     <div className="h-screen flex overflow-hidden dark:bg-zinc-800">
       <Sidenav showMenu={showMenu} toggleShowMenu={handleShowMenuToggle} />
       <div className="w-full mx-auto overflow-y-auto">
-        <div className="border-b flex items-center h-16 dark:border-zinc-700">
+        <div className="border-b flex items-center h-16 dark:border-zinc-600">
           <div className="max-w-5xl w-full m-auto flex items-center justify-between px-4">
             <h1 className="hidden xl:block text-lg font-semibold dark:text-zinc-200">
               Transactions
@@ -64,7 +64,7 @@ const Home = (): JSX.Element | null => {
                   onChange={(e) => setEndDate(new Date(e.target.value))}
                   value={end.toISOString().substring(0, 10)}
                 />
-                <Button onClick={fetchData} text="Apply" />
+                <Button variant="secondary" onClick={fetchData} text="Search" />
               </div>
             </div>
           </div>

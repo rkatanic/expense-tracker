@@ -57,13 +57,13 @@ const UpdateTransaction = ({
             className="fixed inset-0 bg-zinc-500/50 dark:bg-zinc-900/80"
           ></div>
 
-          <div className="flex flex-col h-screen overflow-y-auto border-l fixed top-0 right-0 w-full max-w-sm  bg-white dark:border-zinc-700 dark:bg-zinc-800">
-            <h2 className="flex justify-between text-lg font-semibold p-4 border-b dark:text-zinc-200 dark:border-zinc-700">
+          <div className="flex flex-col h-screen overflow-y-auto border-l fixed top-0 right-0 w-full max-w-sm  bg-white dark:border-zinc-600 dark:bg-zinc-800">
+            <h2 className="flex justify-between text-lg font-semibold p-4 border-b dark:text-zinc-200 dark:border-zinc-600">
               Update transaction
               <FiX
                 onClick={onClose}
                 size="1.5rem"
-                className="stroke-zinc-500 cursor-pointer"
+                className="stroke-zinc-400 cursor-pointer"
               />
             </h2>
             <form
@@ -150,7 +150,7 @@ const UpdateTransaction = ({
                 </div>
               </div>
 
-              <div className="top-0 border-t flex justify-end gap-4 p-4 dark:border-zinc-700">
+              <div className="top-0 border-t flex justify-end gap-4 p-4 dark:border-zinc-600">
                 <Button variant="secondary" text="Cancel" onClick={onClose} />
                 <Button type="submit" text="Update" />
               </div>
